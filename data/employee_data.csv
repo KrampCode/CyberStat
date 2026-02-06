@@ -1,0 +1,301 @@
+employee_id,department,gender,education_level,age,years_experience,salary,performance_score
+1001,Engineering,Male,Bachelor,24,3.9,70400,3.5
+1002,Finance,Male,Master,22,2.4,72300,3.9
+1003,Engineering,Male,Bachelor,25,1.3,70100,2.4
+1004,Engineering,Male,PhD,34,10.3,118200,4.0
+1005,Engineering,Female,Master,34,8.5,95100,1.3
+1006,Finance,Female,Master,24,0.7,85600,3.0
+1007,Sales,Male,Bachelor,31,4.6,72900,3.1
+1008,Sales,Male,High School,24,4.3,61100,4.0
+1009,HR,Female,High School,22,2.3,39300,3.5
+1010,HR,Female,Bachelor,40,19.8,92000,2.4
+1011,Engineering,Male,High School,23,2.7,69000,2.7
+1012,Marketing,Female,Master,24,1.0,51400,3.7
+1013,HR,Female,Master,30,5.5,84900,3.4
+1014,Marketing,Male,Master,28,8.6,86200,3.0
+1015,Engineering,Male,Master,27,0.8,105900,3.1
+1016,Finance,Female,Bachelor,32,6.3,97200,4.1
+1017,Sales,Female,Master,25,3.8,76000,3.1
+1018,Engineering,Female,Master,22,0.7,78900,3.4
+1019,Sales,Male,Bachelor,22,1.5,69700,5.0
+1020,Engineering,Male,Master,25,4.3,102400,2.4
+1021,Engineering,Female,Bachelor,23,3.0,62400,2.0
+1022,HR,Female,Master,38,14.8,85700,4.1
+1023,Engineering,Male,PhD,31,9.6,109000,3.0
+1024,Sales,Female,High School,43,20.9,106900,3.2
+1025,Sales,Female,Master,29,2.1,77200,2.9
+1026,Engineering,Female,Master,43,18.8,133600,3.3
+1027,Finance,Female,PhD,31,4.8,87400,4.8
+1028,Engineering,Female,Bachelor,23,2.2,55000,4.1
+1029,Engineering,Male,Master,24,2.0,89900,4.2
+1030,Engineering,Female,High School,25,1.4,56900,2.4
+1031,Engineering,Male,Bachelor,27,7.0,69400,2.6
+1032,Engineering,Female,High School,24,4.1,71400,1.2
+1033,Marketing,Male,PhD,26,1.4,87800,2.9
+1034,Finance,Female,Master,29,4.9,84300,4.3
+1035,Engineering,Male,Master,25,2.7,81100,3.9
+1036,Marketing,Male,PhD,28,5.0,89200,3.3
+1037,Marketing,Male,High School,27,4.1,55300,3.5
+1038,HR,Male,Bachelor,29,9.5,66000,2.9
+1039,Sales,Female,High School,31,8.9,66500,3.7
+1040,Engineering,Female,Bachelor,25,4.7,83900,4.1
+1041,Engineering,Female,Bachelor,23,2.7,77300,2.2
+1042,Marketing,Male,Bachelor,29,3.3,65600,3.7
+1043,HR,Male,Bachelor,33,9.6,69000,4.2
+1044,Engineering,Male,Bachelor,28,3.8,76000,3.2
+1045,Sales,Male,Bachelor,25,2.8,47600,4.1
+1046,Finance,Female,Bachelor,24,1.8,68900,5.0
+1047,HR,Male,PhD,26,4.5,97700,3.4
+1048,Finance,Male,Master,25,5.2,74200,3.8
+1049,HR,Male,PhD,31,9.8,94800,2.9
+1050,Sales,Male,Bachelor,26,1.3,63900,3.6
+1051,Sales,Female,Bachelor,27,2.9,75300,3.9
+1052,Marketing,Female,Master,32,8.7,84200,3.7
+1053,Engineering,Male,Bachelor,33,10.0,87500,2.7
+1054,Sales,Male,Bachelor,30,3.7,51500,3.7
+1055,Marketing,Male,Bachelor,24,4.3,67600,4.7
+1056,Engineering,Male,Bachelor,23,1.8,88800,3.9
+1057,HR,Male,Bachelor,37,14.9,92500,4.3
+1058,Sales,Female,Bachelor,26,1.3,61100,3.3
+1059,Finance,Female,Master,41,14.9,112800,4.1
+1060,Engineering,Female,High School,28,6.9,77200,3.7
+1061,Engineering,Male,Bachelor,30,4.5,72700,2.7
+1062,Marketing,Male,Master,26,0.4,73600,3.8
+1063,Engineering,Female,Bachelor,24,3.4,78300,2.7
+1064,Marketing,Female,Bachelor,27,4.3,66900,3.0
+1065,HR,Female,Master,25,2.7,61900,3.7
+1066,Engineering,Male,Bachelor,33,6.6,94900,3.7
+1067,Sales,Female,High School,39,17.9,100100,2.5
+1068,Sales,Male,Bachelor,30,4.9,65800,4.3
+1069,Sales,Female,Bachelor,30,7.7,85300,4.0
+1070,Finance,Female,Master,27,1.9,73800,2.9
+1071,HR,Female,Master,25,2.9,64000,2.3
+1072,Marketing,Male,Bachelor,24,0.6,51400,3.4
+1073,Marketing,Female,Master,32,6.2,67300,3.1
+1074,Sales,Male,Bachelor,40,14.7,98500,3.6
+1075,Finance,Male,Bachelor,31,5.9,63100,3.2
+1076,Marketing,Male,Master,22,0.4,57200,1.9
+1077,Marketing,Female,Bachelor,28,3.3,47600,3.2
+1078,Finance,Male,Bachelor,26,5.7,76600,3.3
+1079,Engineering,Male,High School,27,4.5,70000,4.0
+1080,HR,Female,Bachelor,33,10.1,75600,2.9
+1081,Engineering,Male,Bachelor,32,9.5,83400,4.8
+1082,Engineering,Female,Master,28,4.9,80900,2.0
+1083,Engineering,Male,High School,30,3.4,72200,4.5
+1084,Finance,Male,Bachelor,23,2.2,64100,3.3
+1085,Finance,Female,Bachelor,26,1.8,70000,4.2
+1086,Marketing,Male,Master,25,3.0,66400,3.6
+1087,Marketing,Male,Master,24,3.1,75200,4.4
+1088,Sales,Female,Master,26,5.8,92900,3.2
+1089,Finance,Female,Master,32,6.0,92700,2.6
+1090,Sales,Female,Master,26,0.6,66200,4.6
+1091,Sales,Male,Bachelor,29,2.9,67300,3.4
+1092,Engineering,Male,Bachelor,29,3.0,73600,3.7
+1093,HR,Female,Master,23,1.7,67300,4.5
+1094,Marketing,Female,PhD,32,9.8,99900,2.7
+1095,Sales,Female,Master,26,2.0,71700,4.0
+1096,Engineering,Female,Bachelor,28,4.7,81400,3.0
+1097,HR,Female,Bachelor,25,2.1,50300,3.4
+1098,Engineering,Female,Bachelor,34,12.2,90400,3.6
+1099,Marketing,Male,Master,28,4.7,66600,2.3
+1100,Finance,Female,Bachelor,25,1.9,54900,2.9
+1101,Sales,Male,Bachelor,25,4.3,59000,4.6
+1102,Engineering,Male,Master,31,7.9,99000,4.2
+1103,Marketing,Female,Bachelor,41,17.2,91900,3.4
+1104,HR,Female,Master,25,1.9,71900,3.7
+1105,Sales,Male,Bachelor,32,11.1,86000,3.3
+1106,Finance,Male,Bachelor,40,14.9,84500,4.6
+1107,Engineering,Male,Bachelor,32,12.7,105000,3.3
+1108,Sales,Female,Master,28,6.2,90000,3.7
+1109,Marketing,Female,Bachelor,31,6.4,64000,4.4
+1110,Finance,Male,Bachelor,27,4.0,76400,2.9
+1111,Engineering,Male,PhD,30,8.5,104400,4.7
+1112,HR,Female,Bachelor,30,5.5,67500,2.3
+1113,Sales,Male,Master,30,6.7,74600,4.8
+1114,Sales,Female,Master,29,4.3,64400,3.2
+1115,Engineering,Non-binary,Bachelor,32,7.8,84400,3.3
+1116,Finance,Male,Master,33,9.1,94800,2.0
+1117,Engineering,Female,Bachelor,24,0.8,66800,3.1
+1118,Engineering,Male,Master,30,9.5,92300,2.7
+1119,Engineering,Male,Bachelor,26,4.8,76800,3.0
+1120,Finance,Female,Master,33,10.5,101400,3.4
+1121,Marketing,Male,Bachelor,28,4.5,66900,4.3
+1122,HR,Non-binary,Master,26,2.8,71500,3.7
+1123,Engineering,Female,Bachelor,34,12.6,94100,3.7
+1124,Marketing,Male,Bachelor,23,3.4,73900,2.6
+1125,Sales,Male,Bachelor,32,9.5,72300,2.8
+1126,HR,Male,Bachelor,26,4.3,67700,4.9
+1127,Finance,Male,Master,29,4.8,94500,2.9
+1128,Engineering,Male,Bachelor,23,2.9,79100,4.8
+1129,Marketing,Male,PhD,28,4.4,87400,3.3
+1130,Engineering,Male,PhD,28,2.1,91000,3.5
+1131,Sales,Female,Master,22,0.4,77300,4.4
+1132,Engineering,Female,Bachelor,26,2.8,63600,4.5
+1133,Engineering,Female,Bachelor,22,1.1,63000,3.4
+1134,Sales,Male,Master,43,19.6,113800,3.2
+1135,Marketing,Male,Bachelor,41,18.1,111200,3.5
+1136,Engineering,Female,High School,27,4.2,73500,3.8
+1137,Marketing,Female,Master,30,6.6,74800,4.2
+1138,Sales,Male,Master,29,3.1,73300,3.5
+1139,Engineering,Female,Master,28,6.9,90300,4.0
+1140,HR,Female,Bachelor,28,8.7,69100,4.8
+1141,Engineering,Female,Master,41,15.3,124100,3.8
+1142,Sales,Male,Bachelor,27,3.8,56500,3.7
+1143,Marketing,Female,Bachelor,35,9.4,92400,2.3
+1144,Engineering,Female,Master,27,3.2,92600,1.4
+1145,Engineering,Female,Bachelor,50,24.4,137700,3.8
+1146,Sales,Female,Bachelor,24,1.6,58300,3.4
+1147,Finance,Female,High School,30,5.4,67300,3.1
+1148,Marketing,Female,Master,33,6.7,71300,3.7
+1149,Marketing,Male,Master,30,6.8,78800,3.5
+1150,Marketing,Female,Master,22,1.0,72400,4.4
+1151,Engineering,Female,Master,37,15.3,126600,3.6
+1152,Sales,Female,Bachelor,23,2.1,54400,2.9
+1153,HR,Male,Bachelor,27,5.6,64100,4.3
+1154,Engineering,Male,Bachelor,25,3.1,74500,3.3
+1155,Engineering,Female,High School,25,1.9,53600,3.9
+1156,Engineering,Female,Bachelor,28,4.6,84200,3.1
+1157,Sales,Female,PhD,25,2.8,81200,3.0
+1158,Finance,Female,High School,26,2.4,59400,3.6
+1159,Engineering,Female,Bachelor,22,2.3,70100,3.5
+1160,Sales,Female,Bachelor,24,3.4,60200,3.9
+1161,Engineering,Female,Bachelor,29,8.4,88900,3.3
+1162,Finance,Female,PhD,35,12.2,113800,2.0
+1163,Engineering,Female,Bachelor,23,2.0,70000,3.2
+1164,Sales,Male,Bachelor,25,3.4,60700,4.1
+1165,Marketing,Male,Master,24,1.4,72100,3.3
+1166,Marketing,Female,Bachelor,27,2.0,74200,3.3
+1167,Sales,Male,Bachelor,25,5.9,73900,4.3
+1168,Engineering,Male,Bachelor,29,4.9,88200,2.9
+1169,Sales,Male,Master,26,2.1,62100,2.3
+1170,Engineering,Male,PhD,28,3.3,99500,3.4
+1171,Engineering,Male,Master,27,0.9,71500,3.1
+1172,Sales,Male,Bachelor,29,9.1,68900,2.7
+1173,Engineering,Female,Master,40,19.1,119800,3.4
+1174,Engineering,Female,Bachelor,27,1.7,81800,3.9
+1175,Marketing,Male,High School,24,1.6,59600,3.5
+1176,Finance,Male,Bachelor,35,11.5,93700,3.7
+1177,Marketing,Female,Bachelor,39,15.0,81200,5.0
+1178,Engineering,Male,Bachelor,28,3.6,75400,3.2
+1179,Engineering,Female,Master,27,1.0,82900,3.7
+1180,Finance,Female,PhD,27,1.0,88900,3.1
+1181,Engineering,Female,Bachelor,29,4.5,64500,2.8
+1182,Engineering,Male,Bachelor,26,4.3,71600,3.0
+1183,Sales,Female,High School,27,1.0,52000,3.1
+1184,Marketing,Male,High School,25,5.2,65300,3.8
+1185,Marketing,Female,Master,23,1.4,51900,5.0
+1186,Engineering,Female,Bachelor,34,8.6,88200,2.9
+1187,Engineering,Male,Master,24,3.1,86900,3.2
+1188,Finance,Male,Bachelor,22,0.3,70500,3.4
+1189,Engineering,Male,High School,27,6.1,80800,3.8
+1190,Marketing,Female,Bachelor,30,4.4,71700,3.7
+1191,Marketing,Male,Bachelor,43,19.5,98400,4.5
+1192,Marketing,Female,High School,30,5.8,47200,1.6
+1193,Engineering,Male,Master,23,1.9,79600,1.6
+1194,Engineering,Female,Bachelor,32,7.1,93800,3.1
+1195,Sales,Female,Master,28,2.8,86100,4.4
+1196,Finance,Female,Bachelor,35,12.9,100900,2.2
+1197,Finance,Female,Bachelor,26,3.2,74400,1.1
+1198,Engineering,Male,Bachelor,26,4.7,82800,4.0
+1199,Engineering,Male,Master,27,0.5,74800,3.7
+1200,Finance,Female,Bachelor,28,3.6,71000,2.6
+1201,Marketing,Male,Master,35,9.3,102600,2.7
+1202,Finance,Male,Bachelor,31,9.7,79700,2.7
+1203,Engineering,Male,Master,27,1.7,95200,3.6
+1204,Sales,Male,Bachelor,26,1.4,58900,3.0
+1205,Marketing,Male,Master,34,9.6,100600,3.9
+1206,Marketing,Female,Master,41,14.5,91000,1.2
+1207,Sales,Male,PhD,24,2.2,90200,2.8
+1208,Engineering,Female,Bachelor,25,4.1,72400,2.6
+1209,Sales,Male,High School,27,2.7,45400,3.3
+1210,Engineering,Female,High School,36,11.8,91200,3.1
+1211,Sales,Male,Master,25,1.5,79800,4.1
+1212,Finance,Female,Bachelor,22,1.3,59500,2.0
+1213,Sales,Female,Master,31,8.1,76300,3.5
+1214,HR,Male,Bachelor,24,2.1,57500,3.9
+1215,Engineering,Female,Bachelor,27,4.2,77800,5.0
+1216,Marketing,Non-binary,High School,28,3.5,61100,3.1
+1217,Finance,Female,PhD,27,2.3,98300,3.8
+1218,Engineering,Female,Master,24,2.8,84500,2.1
+1219,Engineering,Male,PhD,27,4.6,116300,1.6
+1220,Sales,Female,Bachelor,23,2.1,65000,4.2
+1221,Engineering,Male,Master,25,4.4,86200,3.5
+1222,Marketing,Male,Master,35,10.1,78400,4.4
+1223,Finance,Non-binary,Bachelor,34,8.6,82400,2.4
+1224,Sales,Male,Master,24,2.0,70300,3.9
+1225,Engineering,Female,PhD,27,2.5,103900,5.0
+1226,Sales,Female,Master,27,1.7,75900,3.8
+1227,Marketing,Female,Master,29,3.2,64600,3.7
+1228,Engineering,Non-binary,Bachelor,25,3.9,79100,3.5
+1229,Sales,Male,Bachelor,33,7.3,81600,2.2
+1230,Marketing,Male,PhD,24,1.9,95000,4.6
+1231,Marketing,Male,High School,23,0.7,56900,3.0
+1232,Engineering,Male,Master,24,4.4,95100,3.9
+1233,Marketing,Male,Master,29,6.2,82000,2.2
+1234,Engineering,Male,Master,23,2.8,88100,2.6
+1235,Engineering,Female,PhD,28,7.1,117700,4.6
+1236,Finance,Female,Bachelor,24,1.9,57100,3.2
+1237,Marketing,Male,Bachelor,37,12.3,84000,4.7
+1238,Engineering,Female,High School,37,11.4,82300,3.4
+1239,Engineering,Male,Bachelor,24,2.6,77500,2.0
+1240,Engineering,Male,Bachelor,28,2.3,83600,4.2
+1241,Engineering,Female,Bachelor,29,3.8,72700,3.0
+1242,Engineering,Female,Master,28,3.2,66900,4.1
+1243,Engineering,Female,PhD,27,6.9,104000,3.5
+1244,Sales,Male,Bachelor,34,9.7,89600,2.3
+1245,Marketing,Female,Bachelor,33,7.2,78300,3.6
+1246,Marketing,Female,PhD,35,10.6,107900,5.0
+1247,Marketing,Female,High School,24,2.6,52300,3.9
+1248,Engineering,Female,High School,26,2.8,56800,3.5
+1249,Finance,Female,Bachelor,31,6.9,84400,4.4
+1250,HR,Female,Master,27,3.9,66100,3.7
+1251,HR,Female,Bachelor,26,6.1,85700,3.7
+1252,HR,Non-binary,PhD,23,1.8,84100,2.6
+1253,Finance,Female,Bachelor,26,1.3,61600,3.7
+1254,Sales,Male,Bachelor,51,25.8,117600,4.3
+1255,Engineering,Female,Bachelor,22,1.6,71300,2.8
+1256,Marketing,Male,Bachelor,49,22.4,110100,4.6
+1257,Marketing,Male,Master,42,20.1,125200,3.4
+1258,Marketing,Female,Master,34,9.7,91700,2.8
+1259,Sales,Female,Master,31,6.2,77600,4.3
+1260,Engineering,Female,Master,30,4.7,104900,3.3
+1261,Sales,Male,PhD,37,10.9,107600,4.1
+1262,Finance,Female,Master,23,1.8,83700,3.3
+1263,Sales,Male,Master,30,4.8,75100,3.5
+1264,Sales,Non-binary,High School,27,6.5,69200,3.9
+1265,Engineering,Non-binary,High School,28,3.8,72000,3.7
+1266,Sales,Female,Bachelor,28,3.5,51600,1.9
+1267,Finance,Female,Master,28,3.6,98100,2.6
+1268,Marketing,Female,Bachelor,27,5.3,79600,4.2
+1269,HR,Female,Bachelor,37,11.2,77800,3.4
+1270,Sales,Male,Master,23,2.4,65200,3.1
+1271,Marketing,Male,Master,35,15.2,106800,2.4
+1272,Engineering,Female,PhD,32,7.0,108200,2.6
+1273,Marketing,Female,Bachelor,32,9.5,82600,1.9
+1274,Sales,Male,Master,31,6.0,84500,3.4
+1275,Sales,Female,Bachelor,31,8.6,83500,3.0
+1276,Marketing,Male,Bachelor,22,1.3,70800,2.7
+1277,Finance,Female,Bachelor,34,9.0,90000,3.4
+1278,Engineering,Female,Bachelor,25,1.5,63400,3.8
+1279,HR,Female,Bachelor,33,12.2,94400,5.0
+1280,Engineering,Female,Master,49,24.5,152400,2.3
+1281,Sales,Male,Bachelor,25,1.9,88000,4.4
+1282,Engineering,Male,Master,26,2.4,75000,4.3
+1283,Engineering,Female,Bachelor,32,8.8,91900,2.9
+1284,Sales,Female,Bachelor,28,2.5,47600,3.7
+1285,Engineering,Male,Bachelor,36,10.5,98700,3.1
+1286,Sales,Female,Bachelor,26,1.9,58400,3.6
+1287,Finance,Male,Master,22,0.8,90400,4.7
+1288,Engineering,Female,Bachelor,46,20.2,112300,4.0
+1289,HR,Female,Bachelor,30,5.9,54200,3.9
+1290,Sales,Male,Bachelor,34,9.8,78700,3.2
+1291,Marketing,Male,Bachelor,24,2.4,46200,2.3
+1292,Engineering,Female,PhD,32,6.4,112000,3.3
+1293,Engineering,Female,Bachelor,29,4.6,63000,4.5
+1294,Engineering,Female,Master,26,5.4,91700,2.3
+1295,Engineering,Female,Master,29,6.8,78400,2.7
+1296,Engineering,Female,PhD,31,5.2,100400,3.6
+1297,Marketing,Non-binary,Master,23,3.6,88100,2.7
+1298,Finance,Female,Master,30,3.3,84100,2.9
+1299,HR,Female,Master,32,7.6,75100,3.2
+1300,Marketing,Male,Master,26,2.3,71500,2.4

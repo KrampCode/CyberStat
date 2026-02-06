@@ -1,0 +1,80 @@
+# =============================================================================
+# CyberStat .gitignore
+# =============================================================================
+
+# === SECRETS & CONFIG ===
+.env
+*.env.local
+credentials.json
+secrets.json
+
+# === PYTHON ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# === VIRTUAL ENVIRONMENTS ===
+venv/
+.venv/
+ENV/
+env/
+.conda/
+
+# === IDE / EDITOR ===
+.cursor/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# === JUPYTER ===
+.ipynb_checkpoints/
+*.ipynb
+
+# === TESTING ===
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# === LOGS & TEMP ===
+*.log
+logs/
+tmp/
+temp/
+
+# === OS FILES ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === PROJECT SPECIFIC ===
+# Uncomment if you want to keep docs private too:
+# docs/
+
+# Keep these tracked:
+# !.env.example
+# !data/  (sample datasets for testing)
+# !Screenshots/  (for README documentation)

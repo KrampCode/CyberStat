@@ -1,0 +1,401 @@
+customer_id,membership_tier,preferred_category,acquisition_channel,total_purchases,avg_order_value,days_since_last_purchase,customer_lifetime_value
+CUST00001,Silver,Sports,Social Media,10,76.83,17,766.31
+CUST00002,Bronze,Home,Paid Search,5,61.97,3,357.03
+CUST00003,Bronze,Home,Paid Search,7,38.41,4,257.82
+CUST00004,Bronze,Home,Paid Search,7,51.33,16,326.07
+CUST00005,Platinum,Fashion,Paid Search,17,102.1,1,1629.89
+CUST00006,Platinum,Home,Organic,43,97.34,1,4541.85
+CUST00007,Gold,Home,Referral,21,119.45,12,2563.64
+CUST00008,Bronze,Fashion,Organic,6,80.05,1,557.95
+CUST00009,Bronze,Fashion,Referral,5,34.48,53,179.45
+CUST00010,Bronze,Sports,Social Media,3,42.52,4,127.2
+CUST00011,Bronze,Beauty,Paid Search,9,38.72,110,388.31
+CUST00012,Silver,Electronics,Social Media,16,134.59,13,2538.93
+CUST00013,Silver,Electronics,Paid Search,5,207.41,19,977.25
+CUST00014,Gold,Home,Paid Search,28,65.63,1,1653.79
+CUST00015,Gold,Sports,Organic,16,76.12,14,1274.54
+CUST00016,Bronze,Home,Paid Search,5,83.19,54,415.76
+CUST00017,Silver,Electronics,Organic,7,47.2,15,395.05
+CUST00018,Bronze,Fashion,Organic,7,84.14,20,580.11
+CUST00019,Bronze,Beauty,Paid Search,8,54.03,38,358.64
+CUST00020,Silver,Sports,Organic,3,28.11,1,100.43
+CUST00021,Bronze,Fashion,Paid Search,9,28.5,26,291.75
+CUST00022,Bronze,Beauty,Organic,6,46.11,56,241.05
+CUST00023,Bronze,Sports,Organic,6,100.63,13,701.5
+CUST00024,Silver,Sports,Organic,14,43.02,1,563.89
+CUST00025,Silver,Electronics,Email,9,51.46,8,440.37
+CUST00026,Bronze,Fashion,Organic,5,60.68,38,352.72
+CUST00027,Gold,Sports,Social Media,19,35.93,1,690.89
+CUST00028,Bronze,Sports,Organic,6,63.39,6,325.23
+CUST00029,Bronze,Beauty,Email,5,25.23,4,119.54
+CUST00030,Silver,Electronics,Organic,2,89.26,23,194.38
+CUST00031,Silver,Home,Email,1,44.86,1,39.01
+CUST00032,Platinum,Electronics,Social Media,34,63.61,4,2240.8
+CUST00033,Bronze,Home,Organic,3,62.58,13,202.4
+CUST00034,Silver,Fashion,Referral,6,99.98,21,562.41
+CUST00035,Silver,Fashion,Paid Search,4,81.13,50,349.69
+CUST00036,Gold,Sports,Paid Search,11,91.81,1,1165.12
+CUST00037,Bronze,Fashion,Referral,6,61.0,11,361.92
+CUST00038,Silver,Sports,Email,7,81.38,24,542.98
+CUST00039,Silver,Electronics,Paid Search,9,84.1,4,681.56
+CUST00040,Bronze,Fashion,Paid Search,1,44.83,7,46.7
+CUST00041,Bronze,Electronics,Referral,4,75.74,52,348.99
+CUST00042,Bronze,Electronics,Social Media,6,36.63,130,204.37
+CUST00043,Silver,Fashion,Referral,9,116.01,12,1000.75
+CUST00044,Gold,Electronics,Social Media,26,122.38,2,3063.04
+CUST00045,Silver,Fashion,Organic,11,200.02,7,2253.74
+CUST00046,Silver,Fashion,Email,9,86.91,2,697.22
+CUST00047,Silver,Fashion,Organic,7,105.9,21,836.84
+CUST00048,Bronze,Home,Paid Search,7,25.02,44,160.82
+CUST00049,Bronze,Electronics,Paid Search,6,87.43,62,567.67
+CUST00050,Bronze,Beauty,Social Media,5,98.32,1,494.2
+CUST00051,Bronze,Fashion,Organic,6,115.86,24,719.05
+CUST00052,Bronze,Electronics,Referral,6,57.99,7,303.35
+CUST00053,Silver,Sports,Paid Search,16,56.66,6,991.79
+CUST00054,Bronze,Fashion,Paid Search,2,31.67,46,55.45
+CUST00055,Bronze,Fashion,Referral,5,33.15,6,140.12
+CUST00056,Bronze,Beauty,Paid Search,3,53.9,30,164.72
+CUST00057,Bronze,Home,Organic,3,22.74,31,73.93
+CUST00058,Gold,Home,Organic,29,56.36,23,1340.26
+CUST00059,Gold,Fashion,Email,8,86.54,11,573.07
+CUST00060,Silver,Electronics,Organic,8,69.52,24,623.5
+CUST00061,Bronze,Sports,Paid Search,12,33.63,22,453.45
+CUST00062,Silver,Sports,Paid Search,6,36.27,3,195.45
+CUST00063,Gold,Electronics,Paid Search,9,48.12,4,453.04
+CUST00064,Silver,Fashion,Organic,11,60.19,11,647.04
+CUST00065,Bronze,Sports,Paid Search,3,158.36,34,500.3
+CUST00066,Silver,Home,Paid Search,9,114.22,14,1177.19
+CUST00067,Gold,Electronics,Email,18,92.11,3,1379.34
+CUST00068,Silver,Beauty,Organic,12,88.67,4,1182.35
+CUST00069,Silver,Fashion,Paid Search,6,111.71,2,668.39
+CUST00070,Bronze,Electronics,Paid Search,7,76.54,35,549.52
+CUST00071,Silver,Sports,Paid Search,9,57.62,15,550.51
+CUST00072,Bronze,Fashion,Social Media,4,35.77,34,167.27
+CUST00073,Silver,Home,Organic,8,63.14,6,415.56
+CUST00074,Bronze,Fashion,Organic,4,90.21,9,292.93
+CUST00075,Bronze,Fashion,Social Media,7,47.69,42,290.87
+CUST00076,Bronze,Home,Paid Search,4,31.43,44,150.18
+CUST00077,Silver,Home,Paid Search,4,28.4,9,123.37
+CUST00078,Bronze,Fashion,Organic,2,51.39,28,107.49
+CUST00079,Silver,Home,Organic,8,40.25,7,263.66
+CUST00080,Silver,Electronics,Organic,12,54.04,18,746.82
+CUST00081,Bronze,Home,Organic,4,113.08,54,508.91
+CUST00082,Bronze,Home,Social Media,8,53.15,34,453.23
+CUST00083,Bronze,Fashion,Referral,6,37.52,21,210.63
+CUST00084,Gold,Electronics,Paid Search,9,96.57,4,719.82
+CUST00085,Silver,Beauty,Paid Search,13,175.64,15,2356.42
+CUST00086,Bronze,Beauty,Organic,6,51.4,34,335.5
+CUST00087,Bronze,Sports,Paid Search,7,16.81,24,98.57
+CUST00088,Silver,Home,Organic,9,93.04,14,882.16
+CUST00089,Gold,Home,Email,7,98.41,1,630.0
+CUST00090,Gold,Electronics,Social Media,20,86.57,22,1914.4
+CUST00091,Silver,Beauty,Email,5,60.24,23,305.97
+CUST00092,Bronze,Sports,Referral,5,36.47,14,155.29
+CUST00093,Bronze,Electronics,Paid Search,9,116.45,24,1059.17
+CUST00094,Bronze,Home,Paid Search,6,21.78,1,125.23
+CUST00095,Bronze,Beauty,Organic,6,46.78,1,244.79
+CUST00096,Bronze,Sports,Paid Search,8,46.24,8,420.45
+CUST00097,Bronze,Fashion,Email,5,83.66,35,336.49
+CUST00098,Bronze,Beauty,Organic,5,101.27,57,468.3
+CUST00099,Gold,Sports,Referral,16,73.89,6,951.75
+CUST00100,Silver,Electronics,Paid Search,5,74.03,11,310.33
+CUST00101,Gold,Fashion,Referral,20,95.1,3,1747.63
+CUST00102,Silver,Sports,Email,6,113.82,2,561.16
+CUST00103,Bronze,Sports,Social Media,9,91.5,3,855.33
+CUST00104,Silver,Home,Social Media,10,51.35,21,428.64
+CUST00105,Bronze,Beauty,Paid Search,5,67.96,78,367.22
+CUST00106,Silver,Home,Referral,10,81.42,9,668.5
+CUST00107,Bronze,Fashion,Email,6,51.52,32,254.63
+CUST00108,Platinum,Sports,Referral,1,122.82,9,113.26
+CUST00109,Bronze,Home,Social Media,7,55.15,2,447.29
+CUST00110,Bronze,Beauty,Social Media,4,59.08,44,249.69
+CUST00111,Gold,Fashion,Referral,13,42.01,7,605.14
+CUST00112,Bronze,Electronics,Paid Search,9,34.5,27,265.98
+CUST00113,Silver,Home,Referral,6,101.17,5,688.15
+CUST00114,Silver,Fashion,Paid Search,3,36.7,17,88.44
+CUST00115,Gold,Electronics,Organic,23,104.68,11,2131.3
+CUST00116,Platinum,Home,Paid Search,26,97.82,1,2661.42
+CUST00117,Platinum,Fashion,Paid Search,20,170.57,2,3241.17
+CUST00118,Bronze,Fashion,Organic,7,75.52,3,631.03
+CUST00119,Gold,Home,Organic,11,65.97,15,589.34
+CUST00120,Silver,Fashion,Paid Search,10,60.12,10,721.1
+CUST00121,Silver,Sports,Organic,11,24.91,24,287.56
+CUST00122,Bronze,Home,Paid Search,4,51.15,13,209.4
+CUST00123,Silver,Fashion,Social Media,8,35.62,2,234.75
+CUST00124,Platinum,Electronics,Email,19,91.33,1,1577.94
+CUST00125,Gold,Electronics,Social Media,12,60.16,2,844.55
+CUST00126,Bronze,Sports,Email,4,35.22,8,132.67
+CUST00127,Bronze,Home,Social Media,4,98.88,24,421.09
+CUST00128,Bronze,Fashion,Paid Search,7,28.84,1,242.22
+CUST00129,Gold,Fashion,Social Media,9,51.13,5,416.56
+CUST00130,Silver,Electronics,Social Media,5,47.41,7,244.26
+CUST00131,Bronze,Sports,Paid Search,7,42.92,25,324.05
+CUST00132,Bronze,Electronics,Organic,6,35.22,36,182.97
+CUST00133,Bronze,Electronics,Social Media,6,45.62,30,235.25
+CUST00134,Bronze,Sports,Organic,7,63.5,125,436.73
+CUST00135,Gold,Home,Social Media,23,115.68,1,2539.12
+CUST00136,Silver,Fashion,Organic,7,91.71,8,696.98
+CUST00137,Bronze,Home,Social Media,4,21.03,16,69.63
+CUST00138,Silver,Beauty,Paid Search,8,81.29,8,773.14
+CUST00139,Bronze,Beauty,Organic,3,68.1,32,164.61
+CUST00140,Platinum,Beauty,Paid Search,17,73.16,2,1294.12
+CUST00141,Bronze,Sports,Social Media,8,125.69,21,1030.71
+CUST00142,Bronze,Electronics,Referral,5,94.05,16,401.54
+CUST00143,Bronze,Home,Referral,8,49.82,143,342.91
+CUST00144,Silver,Fashion,Paid Search,5,49.9,39,278.71
+CUST00145,Silver,Beauty,Social Media,12,153.49,5,2127.42
+CUST00146,Silver,Home,Paid Search,7,66.58,1,425.61
+CUST00147,Bronze,Beauty,Paid Search,5,56.97,54,277.78
+CUST00148,Bronze,Beauty,Organic,4,56.61,176,213.31
+CUST00149,Bronze,Fashion,Social Media,6,172.7,10,859.03
+CUST00150,Silver,Sports,Paid Search,11,60.32,6,709.49
+CUST00151,Bronze,Electronics,Organic,3,53.96,85,182.94
+CUST00152,Silver,Sports,Social Media,9,44.36,18,368.08
+CUST00153,Gold,Home,Social Media,12,68.11,2,977.57
+CUST00154,Gold,Sports,Paid Search,13,49.41,6,533.35
+CUST00155,Bronze,Home,Organic,4,36.4,86,155.02
+CUST00156,Bronze,Home,Paid Search,8,22.09,50,173.06
+CUST00157,Bronze,Electronics,Paid Search,6,84.84,40,498.17
+CUST00158,Silver,Fashion,Social Media,11,72.7,20,786.15
+CUST00159,Gold,Electronics,Paid Search,18,93.26,1,1516.64
+CUST00160,Bronze,Sports,Social Media,6,53.19,52,346.66
+CUST00161,Bronze,Home,Referral,6,56.59,9,369.63
+CUST00162,Gold,Beauty,Organic,7,185.95,19,1188.35
+CUST00163,Gold,Beauty,Email,21,56.35,3,1342.06
+CUST00164,Bronze,Home,Paid Search,9,62.75,58,523.38
+CUST00165,Silver,Electronics,Paid Search,9,77.05,4,755.89
+CUST00166,Bronze,Fashion,Paid Search,7,96.64,21,573.93
+CUST00167,Bronze,Electronics,Organic,5,67.99,3,294.9
+CUST00168,Gold,Home,Organic,9,105.67,8,880.96
+CUST00169,Gold,Home,Paid Search,24,44.11,13,1098.39
+CUST00170,Silver,Fashion,Referral,15,44.86,19,712.07
+CUST00171,Bronze,Sports,Email,4,30.46,22,116.79
+CUST00172,Gold,Sports,Social Media,2,24.0,1,39.89
+CUST00173,Bronze,Fashion,Organic,7,66.59,81,442.57
+CUST00174,Bronze,Sports,Social Media,3,47.9,36,154.55
+CUST00175,Silver,Beauty,Social Media,4,82.06,20,350.69
+CUST00176,Bronze,Sports,Referral,5,55.58,47,240.13
+CUST00177,Silver,Sports,Referral,12,75.8,20,730.51
+CUST00178,Silver,Sports,Referral,5,131.24,8,722.6
+CUST00179,Bronze,Beauty,Paid Search,9,54.8,39,415.54
+CUST00180,Bronze,Sports,Social Media,8,76.29,29,508.36
+CUST00181,Bronze,Beauty,Paid Search,7,46.94,57,263.22
+CUST00182,Bronze,Fashion,Email,7,82.47,48,561.73
+CUST00183,Silver,Electronics,Organic,8,36.17,1,289.74
+CUST00184,Gold,Fashion,Organic,3,33.02,3,104.51
+CUST00185,Bronze,Electronics,Organic,4,156.54,1,575.08
+CUST00186,Bronze,Fashion,Referral,7,136.75,3,1037.82
+CUST00187,Silver,Electronics,Paid Search,10,25.41,13,220.49
+CUST00188,Gold,Electronics,Paid Search,6,81.27,15,552.37
+CUST00189,Bronze,Home,Email,5,58.85,3,302.71
+CUST00190,Bronze,Electronics,Email,5,78.37,17,405.0
+CUST00191,Silver,Electronics,Paid Search,9,160.38,36,1275.85
+CUST00192,Bronze,Home,Organic,5,32.11,50,133.2
+CUST00193,Bronze,Sports,Referral,7,32.99,21,227.67
+CUST00194,Silver,Sports,Email,5,67.18,22,351.43
+CUST00195,Silver,Home,Paid Search,10,41.52,11,347.95
+CUST00196,Silver,Beauty,Social Media,10,17.3,2,204.18
+CUST00197,Silver,Electronics,Paid Search,8,60.0,1,572.24
+CUST00198,Silver,Electronics,Referral,7,103.2,3,735.54
+CUST00199,Bronze,Home,Social Media,3,54.04,12,191.31
+CUST00200,Bronze,Home,Paid Search,5,74.59,80,325.13
+CUST00201,Bronze,Beauty,Organic,4,69.44,48,225.03
+CUST00202,Bronze,Sports,Email,9,32.67,17,239.86
+CUST00203,Silver,Fashion,Social Media,4,69.54,10,287.9
+CUST00204,Gold,Sports,Organic,10,38.6,2,318.32
+CUST00205,Platinum,Electronics,Social Media,27,78.88,4,2520.4
+CUST00206,Silver,Home,Social Media,7,68.94,24,413.46
+CUST00207,Bronze,Beauty,Paid Search,7,54.57,8,352.15
+CUST00208,Bronze,Sports,Social Media,7,28.63,1,226.26
+CUST00209,Gold,Beauty,Social Media,7,48.01,7,298.26
+CUST00210,Silver,Sports,Email,5,77.74,12,348.74
+CUST00211,Silver,Electronics,Organic,9,101.66,7,967.02
+CUST00212,Silver,Fashion,Organic,8,60.61,15,441.45
+CUST00213,Silver,Beauty,Organic,9,59.11,11,471.86
+CUST00214,Gold,Beauty,Social Media,10,131.83,2,1188.67
+CUST00215,Bronze,Fashion,Social Media,3,37.11,15,110.91
+CUST00216,Silver,Beauty,Referral,7,159.41,8,1323.91
+CUST00217,Gold,Beauty,Social Media,22,42.24,15,1052.78
+CUST00218,Bronze,Sports,Paid Search,2,92.23,97,168.57
+CUST00219,Silver,Sports,Email,19,88.02,33,1580.98
+CUST00220,Bronze,Fashion,Paid Search,6,182.19,38,1077.62
+CUST00221,Platinum,Electronics,Referral,12,58.16,3,831.62
+CUST00222,Bronze,Beauty,Paid Search,9,17.0,35,132.95
+CUST00223,Silver,Electronics,Social Media,3,125.55,41,355.18
+CUST00224,Bronze,Fashion,Social Media,10,26.16,8,285.61
+CUST00225,Silver,Fashion,Social Media,3,91.45,11,325.26
+CUST00226,Bronze,Sports,Organic,6,98.6,35,510.12
+CUST00227,Bronze,Beauty,Paid Search,3,66.01,34,176.44
+CUST00228,Bronze,Home,Social Media,5,61.32,8,272.96
+CUST00229,Gold,Fashion,Referral,11,101.13,6,899.26
+CUST00230,Bronze,Beauty,Paid Search,11,82.99,47,950.91
+CUST00231,Bronze,Electronics,Email,6,73.22,19,469.32
+CUST00232,Silver,Sports,Paid Search,15,36.59,23,571.36
+CUST00233,Silver,Electronics,Paid Search,7,167.41,6,970.93
+CUST00234,Gold,Fashion,Referral,14,84.9,20,983.79
+CUST00235,Bronze,Fashion,Social Media,9,70.75,22,562.99
+CUST00236,Silver,Electronics,Email,20,95.91,13,1757.3
+CUST00237,Bronze,Fashion,Social Media,4,97.32,1,433.9
+CUST00238,Bronze,Beauty,Paid Search,4,92.39,5,319.21
+CUST00239,Silver,Fashion,Organic,5,71.79,15,293.49
+CUST00240,Silver,Sports,Paid Search,8,69.52,8,532.58
+CUST00241,Silver,Beauty,Paid Search,13,82.45,10,1036.0
+CUST00242,Bronze,Home,Social Media,6,94.64,1,556.69
+CUST00243,Bronze,Fashion,Organic,5,31.3,53,176.96
+CUST00244,Bronze,Fashion,Organic,8,75.34,46,505.8
+CUST00245,Platinum,Sports,Organic,28,65.41,1,1980.89
+CUST00246,Bronze,Sports,Organic,8,137.77,30,1030.72
+CUST00247,Bronze,Electronics,Paid Search,6,65.61,51,363.74
+CUST00248,Bronze,Electronics,Referral,10,44.34,30,520.12
+CUST00249,Silver,Electronics,Referral,10,83.29,5,749.1
+CUST00250,Bronze,Sports,Social Media,7,54.85,32,405.84
+CUST00251,Gold,Electronics,Referral,27,76.39,1,1877.01
+CUST00252,Bronze,Electronics,Paid Search,4,22.1,11,88.65
+CUST00253,Gold,Home,Referral,34,49.59,2,1879.14
+CUST00254,Bronze,Electronics,Organic,5,50.9,24,293.36
+CUST00255,Silver,Fashion,Paid Search,3,28.9,1,98.45
+CUST00256,Gold,Sports,Social Media,18,61.7,20,1147.11
+CUST00257,Bronze,Beauty,Organic,5,42.52,12,191.24
+CUST00258,Platinum,Home,Social Media,9,69.0,1,661.05
+CUST00259,Bronze,Sports,Paid Search,3,80.33,20,261.22
+CUST00260,Gold,Sports,Referral,22,53.29,2,942.92
+CUST00261,Silver,Fashion,Paid Search,9,70.26,11,616.96
+CUST00262,Bronze,Electronics,Organic,6,45.76,12,312.26
+CUST00263,Bronze,Fashion,Social Media,6,51.45,4,307.41
+CUST00264,Bronze,Electronics,Paid Search,5,121.9,9,563.51
+CUST00265,Bronze,Electronics,Paid Search,9,59.73,17,617.52
+CUST00266,Bronze,Sports,Organic,8,65.79,1,453.87
+CUST00267,Bronze,Electronics,Social Media,3,37.24,44,98.6
+CUST00268,Bronze,Home,Social Media,6,74.67,29,481.6
+CUST00269,Silver,Home,Paid Search,13,90.01,13,1101.06
+CUST00270,Bronze,Home,Email,3,69.67,23,226.82
+CUST00271,Bronze,Sports,Referral,6,29.83,26,154.47
+CUST00272,Silver,Fashion,Social Media,9,50.17,40,406.79
+CUST00273,Bronze,Beauty,Social Media,8,111.81,1,771.63
+CUST00274,Bronze,Electronics,Paid Search,9,38.71,1,411.51
+CUST00275,Bronze,Beauty,Social Media,1,119.7,6,115.17
+CUST00276,Gold,Fashion,Organic,19,62.97,1,1118.53
+CUST00277,Gold,Fashion,Organic,8,89.12,1,574.42
+CUST00278,Bronze,Sports,Email,4,49.72,33,171.31
+CUST00279,Silver,Home,Social Media,8,44.06,9,341.36
+CUST00280,Silver,Home,Paid Search,5,44.38,72,183.6
+CUST00281,Silver,Fashion,Paid Search,3,47.27,3,142.42
+CUST00282,Silver,Sports,Social Media,7,72.38,5,497.54
+CUST00283,Silver,Sports,Organic,8,104.92,62,929.06
+CUST00284,Bronze,Electronics,Organic,7,56.92,53,423.91
+CUST00285,Bronze,Home,Organic,7,53.69,19,367.7
+CUST00286,Bronze,Fashion,Paid Search,7,100.0,24,622.9
+CUST00287,Gold,Beauty,Social Media,16,84.48,13,1474.34
+CUST00288,Silver,Home,Organic,5,51.24,9,277.5
+CUST00289,Gold,Electronics,Social Media,2,50.25,1,86.56
+CUST00290,Platinum,Sports,Organic,28,192.3,6,6277.68
+CUST00291,Bronze,Fashion,Social Media,8,46.31,23,305.93
+CUST00292,Silver,Home,Email,4,50.33,2,165.49
+CUST00293,Silver,Beauty,Social Media,20,48.2,10,843.44
+CUST00294,Platinum,Electronics,Referral,35,186.97,1,7615.75
+CUST00295,Platinum,Electronics,Email,44,76.5,7,3392.93
+CUST00296,Silver,Home,Paid Search,7,110.3,2,861.03
+CUST00297,Bronze,Beauty,Social Media,6,48.66,62,260.18
+CUST00298,Silver,Electronics,Referral,12,36.74,10,439.16
+CUST00299,Bronze,Fashion,Paid Search,4,46.24,15,174.48
+CUST00300,Silver,Electronics,Paid Search,12,66.13,2,897.62
+CUST00301,Gold,Beauty,Email,20,78.12,9,1264.05
+CUST00302,Bronze,Sports,Social Media,6,50.91,78,274.16
+CUST00303,Silver,Sports,Organic,9,57.22,7,443.41
+CUST00304,Bronze,Home,Paid Search,10,36.87,8,421.67
+CUST00305,Bronze,Beauty,Referral,4,54.89,24,216.71
+CUST00306,Bronze,Electronics,Paid Search,2,71.56,47,137.64
+CUST00307,Silver,Electronics,Social Media,11,32.35,1,348.66
+CUST00308,Gold,Sports,Referral,14,158.45,7,2637.05
+CUST00309,Gold,Sports,Social Media,19,13.03,6,282.26
+CUST00310,Bronze,Fashion,Paid Search,4,56.69,11,245.48
+CUST00311,Gold,Sports,Social Media,13,104.47,4,1244.29
+CUST00312,Silver,Fashion,Social Media,12,49.71,4,516.63
+CUST00313,Bronze,Electronics,Social Media,4,18.86,46,88.16
+CUST00314,Bronze,Fashion,Paid Search,4,52.02,30,201.68
+CUST00315,Bronze,Fashion,Paid Search,9,59.43,22,487.54
+CUST00316,Gold,Home,Email,16,46.6,3,736.93
+CUST00317,Silver,Sports,Organic,8,44.38,5,414.38
+CUST00318,Silver,Fashion,Paid Search,6,108.78,25,623.2
+CUST00319,Bronze,Electronics,Paid Search,5,57.91,18,296.81
+CUST00320,Silver,Beauty,Referral,11,31.61,10,389.85
+CUST00321,Bronze,Fashion,Organic,10,68.37,22,663.77
+CUST00322,Bronze,Sports,Paid Search,6,34.29,17,183.81
+CUST00323,Silver,Home,Organic,10,45.63,4,546.56
+CUST00324,Bronze,Electronics,Social Media,9,60.27,3,641.49
+CUST00325,Gold,Home,Organic,9,87.19,1,892.52
+CUST00326,Bronze,Beauty,Paid Search,6,44.64,42,288.02
+CUST00327,Silver,Fashion,Paid Search,7,52.24,3,335.67
+CUST00328,Bronze,Fashion,Referral,4,48.16,1,224.5
+CUST00329,Silver,Sports,Paid Search,9,45.5,23,372.74
+CUST00330,Bronze,Fashion,Organic,4,94.11,5,421.73
+CUST00331,Bronze,Electronics,Paid Search,5,24.91,29,145.39
+CUST00332,Gold,Beauty,Email,13,73.37,3,993.11
+CUST00333,Bronze,Home,Social Media,7,26.32,4,206.57
+CUST00334,Gold,Beauty,Email,12,132.14,4,1770.69
+CUST00335,Platinum,Fashion,Referral,59,90.26,1,4671.72
+CUST00336,Bronze,Home,Organic,5,32.19,55,171.76
+CUST00337,Bronze,Sports,Social Media,5,76.9,21,321.98
+CUST00338,Silver,Beauty,Paid Search,5,21.37,2,107.19
+CUST00339,Platinum,Home,Social Media,2,117.25,1,202.82
+CUST00340,Gold,Home,Paid Search,15,147.16,4,2133.54
+CUST00341,Silver,Home,Paid Search,10,73.53,3,833.24
+CUST00342,Silver,Electronics,Email,6,52.18,4,374.09
+CUST00343,Bronze,Beauty,Organic,5,29.34,22,136.02
+CUST00344,Platinum,Home,Referral,50,175.05,6,8864.38
+CUST00345,Platinum,Beauty,Organic,27,161.99,1,4393.5
+CUST00346,Bronze,Home,Organic,5,39.54,37,233.63
+CUST00347,Bronze,Sports,Referral,5,40.07,62,198.63
+CUST00348,Bronze,Sports,Social Media,6,98.83,7,640.21
+CUST00349,Bronze,Sports,Social Media,7,71.22,49,582.65
+CUST00350,Gold,Fashion,Organic,16,33.87,10,514.47
+CUST00351,Bronze,Home,Paid Search,5,49.51,13,287.37
+CUST00352,Bronze,Fashion,Social Media,5,48.6,136,283.58
+CUST00353,Bronze,Beauty,Social Media,1,61.79,9,72.43
+CUST00354,Platinum,Fashion,Paid Search,17,102.19,1,1577.71
+CUST00355,Silver,Beauty,Email,16,52.02,22,799.15
+CUST00356,Bronze,Beauty,Social Media,5,59.69,17,342.67
+CUST00357,Bronze,Beauty,Email,6,43.65,12,247.15
+CUST00358,Platinum,Fashion,Social Media,44,561.68,1,25704.98
+CUST00359,Gold,Home,Social Media,13,87.99,10,969.11
+CUST00360,Bronze,Fashion,Organic,5,54.2,46,222.9
+CUST00361,Bronze,Home,Paid Search,5,137.2,25,661.85
+CUST00362,Bronze,Home,Referral,7,27.6,94,199.3
+CUST00363,Bronze,Beauty,Organic,2,51.68,11,98.92
+CUST00364,Silver,Fashion,Organic,8,41.81,3,344.88
+CUST00365,Gold,Home,Paid Search,8,113.68,8,914.93
+CUST00366,Bronze,Sports,Organic,5,42.64,42,229.04
+CUST00367,Gold,Home,Email,13,110.6,1,1523.8
+CUST00368,Bronze,Sports,Referral,8,70.39,2,546.06
+CUST00369,Silver,Fashion,Paid Search,10,99.3,24,963.21
+CUST00370,Silver,Fashion,Organic,7,87.37,56,523.71
+CUST00371,Bronze,Fashion,Social Media,4,48.81,31,196.27
+CUST00372,Bronze,Home,Social Media,6,27.14,9,168.52
+CUST00373,Silver,Electronics,Email,13,111.33,85,1433.68
+CUST00374,Bronze,Home,Social Media,5,110.44,67,513.7
+CUST00375,Bronze,Home,Paid Search,6,34.16,21,223.13
+CUST00376,Silver,Beauty,Paid Search,9,97.11,26,725.29
+CUST00377,Platinum,Beauty,Email,51,56.75,6,3374.05
+CUST00378,Bronze,Home,Social Media,5,60.44,81,244.26
+CUST00379,Gold,Sports,Social Media,11,101.55,13,1323.64
+CUST00380,Bronze,Beauty,Organic,6,44.12,30,260.73
+CUST00381,Silver,Home,Social Media,12,70.49,14,816.33
+CUST00382,Silver,Electronics,Referral,7,102.72,9,648.99
+CUST00383,Gold,Sports,Paid Search,12,78.35,7,755.95
+CUST00384,Bronze,Fashion,Paid Search,5,38.96,47,177.25
+CUST00385,Silver,Home,Paid Search,10,36.45,52,307.55
+CUST00386,Silver,Home,Paid Search,9,55.29,9,529.42
+CUST00387,Bronze,Sports,Organic,7,30.35,25,197.07
+CUST00388,Bronze,Beauty,Paid Search,4,45.21,17,200.17
+CUST00389,Bronze,Beauty,Social Media,8,43.27,33,305.58
+CUST00390,Bronze,Beauty,Organic,4,81.62,29,378.75
+CUST00391,Gold,Fashion,Paid Search,17,85.85,1,1472.87
+CUST00392,Bronze,Sports,Referral,2,195.12,23,330.07
+CUST00393,Bronze,Sports,Social Media,3,19.95,2,57.48
+CUST00394,Silver,Beauty,Social Media,8,78.62,1,555.19
+CUST00395,Bronze,Beauty,Paid Search,5,43.56,46,191.64
+CUST00396,Silver,Electronics,Social Media,1,41.68,4,41.79
+CUST00397,Bronze,Electronics,Organic,3,53.79,12,172.47
+CUST00398,Platinum,Home,Referral,26,96.69,1,2927.85
+CUST00399,Gold,Home,Organic,14,141.85,1,1987.62
+CUST00400,Gold,Sports,Social Media,11,86.62,10,1130.36
