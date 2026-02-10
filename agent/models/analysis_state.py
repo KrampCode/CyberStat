@@ -13,12 +13,8 @@ class AnalysisState(BaseModel):
     """
     The complete state of an analysis session.
     
-    This is the main model that tracks everything - it's stored in
-    Streamlit's session state and rendered by the side panel.
-    
-    Key PydanticAI concept: This acts as "dependencies" context that
-    gets passed to the agent and its tools, allowing them to read
-    and update the analysis state.
+    Tracks data summary, findings, recommendations, and activity log.
+    Stored in Streamlit's session state and rendered by the side panel.
     """
     # Data info (populated when user uploads a file)
     data_summary: Optional[DataSummary] = None

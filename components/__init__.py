@@ -1,1 +1,1 @@
-# UI components module
+"""UI components module."""

@@ -5,13 +5,6 @@ Main Streamlit application that provides:
 - Two-column layout (chat + analysis panel)
 - File upload for datasets
 - Chat interface connected to PydanticAI agent
-
-Streamlit Concepts Demonstrated:
-- Page configuration
-- Session state management
-- Async execution in Streamlit
-- Two-column layouts with bounded containers
-- File uploaders
 """
 
 import asyncio
@@ -19,8 +12,7 @@ import nest_asyncio
 import pandas as pd
 import streamlit as st
 
-# Enable nested event loops - required for running async PydanticAI in Streamlit
-# Without this, asyncio.run() conflicts with Streamlit's event loop
+# Enable nested event loops for async PydanticAI in Streamlit
 nest_asyncio.apply()
 
 from agent.analyst import run_analyst, AnalysisDependencies
@@ -251,8 +243,6 @@ st.markdown("""
 # =============================================================================
 # Session State Initialization
 # =============================================================================
-# Streamlit reruns the entire script on every interaction.
-# Session state persists data across reruns.
 
 def init_session_state():
     """Initialize session state variables if they don't exist."""
@@ -339,7 +329,6 @@ async def get_agent_response(user_message: str) -> str:
     )
     
     # Store the updated message history for the next call
-    # This gives the agent "memory" of the conversation
     st.session_state.pydantic_messages = message_history
     
     # Add any new plots to session state

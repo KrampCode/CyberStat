@@ -1,12 +1,6 @@
 """
 The Data Analytics Agent - powered by PydanticAI and Gemini.
 
-Key PydanticAI Concepts Demonstrated:
-1. Agent creation with a system prompt
-2. Dependencies (RunContext) - passing data to tools
-3. Tool registration with @agent.tool decorator
-4. Structured outputs (optional - we use string responses for chat)
-
 The agent acts as a statistical analyst that can:
 - Understand uploaded datasets
 - Run statistical analyses via tools
@@ -24,29 +18,24 @@ from pydantic_ai import Agent, RunContext
 from .models import AnalysisState
 from . import tools
 
-# Load environment variables from .env file
 load_dotenv()
 
 
 @dataclass
 class AnalysisDependencies:
     """
-    Dependencies that get passed to the agent and its tools.
+    Dependencies passed to the agent and its tools via RunContext.
     
-    PydanticAI Concept: Dependencies are injected into tool functions
-    via RunContext[AnalysisDependencies]. This lets tools access:
+    Provides access to:
     - The current dataframe being analyzed
     - The analysis state (to log activities, add findings)
     - The plots list (to store generated visualizations)
-    
-    Using a dataclass keeps it clean and type-safe.
     """
     df: Optional[pd.DataFrame] = None
     state: Optional[AnalysisState] = None
     plots: Optional[list] = None  # List of (image_bytes, description) tuples
 
 
-# The system prompt defines the agent's persona and behavior
 SYSTEM_PROMPT = """You are a friendly and insightful statistical analyst assistant. 
 Your role is to help users understand their data through conversation.
 
@@ -143,19 +132,16 @@ The user should see: PCA scatter -> Elbow plot -> Cluster scatter. Three visuali
 
 
 # Create the agent with Gemini
-# Using gemini-1.5-flash which is fast and available on free tier
 analyst_agent = Agent(
     model="google-gla:gemini-3-pro-preview",
     system_prompt=SYSTEM_PROMPT,
-    deps_type=AnalysisDependencies,  # Type hint for dependencies
+    deps_type=AnalysisDependencies,
 )
 
 
 # =============================================================================
 # Tool Registration
 # =============================================================================
-# Tools are registered using the @agent.tool decorator.
-# Each tool receives RunContext as its first parameter, giving access to deps.
 
 
 @analyst_agent.tool
@@ -333,7 +319,6 @@ def list_columns(ctx: RunContext[AnalysisDependencies]) -> str:
 # =============================================================================
 # Tools for Recording Insights
 # =============================================================================
-# These tools let the agent save findings and recommendations to the side panel
 
 @analyst_agent.tool
 def record_finding(
@@ -406,7 +391,6 @@ def record_recommendation(
 # =============================================================================
 # Visualization Tools
 # =============================================================================
-# These tools create plots that appear in the Visualizations panel
 
 @analyst_agent.tool
 def create_histogram(

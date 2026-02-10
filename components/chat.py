@@ -1,11 +1,4 @@
-"""
-Chat Interface Component.
-
-Streamlit Concepts Demonstrated:
-- st.chat_message for chat bubbles
-- st.chat_input for the input box
-- Session state for message history
-"""
+"""Chat Interface Component."""
 
 import streamlit as st
 from agent.models import ChatMessage

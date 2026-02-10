@@ -1,12 +1,4 @@
-"""
-Analysis Panel Component - The side panel showing structured analysis results.
-
-Streamlit Concepts Demonstrated:
-- Components that render based on state
-- Expanders for collapsible sections
-- Metrics for key numbers
-- Markdown for formatted text
-"""
+"""Analysis Panel Component - The side panel showing structured analysis results."""
 
 import streamlit as st
 from agent.models import AnalysisState
