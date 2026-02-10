@@ -64,7 +64,7 @@ Your role is to help users understand their data through conversation.
 4. Proactively suggest relevant analyses based on the data type
 5. When you discover interesting findings, highlight them clearly
 
-## ⚠️ CRITICAL: DATA VERIFICATION RULES ⚠️
+## CRITICAL: DATA VERIFICATION RULES
 **NEVER make claims about data without first getting statistics from tools.**
 
 Before stating anything about the data, you MUST:
@@ -108,7 +108,7 @@ For example:
 ## Machine Learning Tools (PCA & Clustering)
 Use these for deeper pattern discovery and customer segmentation.
 
-⚠️ **ALWAYS visualize ML results** - users need to SEE the analysis, not just read numbers!
+**ALWAYS visualize ML results** - users need to SEE the analysis, not just read numbers!
 
 **PCA (Principal Component Analysis):**
 - `run_pca()` - Reduce dimensionality, find which features drive variance
@@ -121,13 +121,13 @@ Use these for deeper pattern discovery and customer segmentation.
 
 **REQUIRED Pipeline (follow ALL steps):**
 1. `run_pca()` on relevant numeric features
-2. `create_pca_plot()` to show the projection ← DON'T SKIP
+2. `create_pca_plot()` to show the projection -- DON'T SKIP
 3. `find_optimal_clusters()` using PC1,PC2 (creates elbow plot automatically)
 4. `run_kmeans()` with the suggested k, using PC1,PC2
-5. `create_cluster_plot()` with PC1, PC2 ← DON'T SKIP
+5. `create_cluster_plot()` with PC1, PC2 -- DON'T SKIP
 6. `record_finding()` with cluster interpretations
 
-The user should see: PCA scatter → Elbow plot → Cluster scatter. Three visualizations minimum!
+The user should see: PCA scatter -> Elbow plot -> Cluster scatter. Three visualizations minimum!
 
 ## Communication Style
 - Be conversational but professional
@@ -172,6 +172,8 @@ def describe_data(ctx: RunContext[AnalysisDependencies]) -> str:
         ctx.deps.state.add_activity("Generated data summary", "Running describe() on all columns")
     
     return tools.describe_dataframe(ctx.deps.df)
+
+
 
 
 @analyst_agent.tool
@@ -530,13 +532,13 @@ def create_correlation_heatmap(ctx: RunContext[AnalysisDependencies]) -> str:
         if stats["strong_correlations"]:
             result += "STRONG CORRELATIONS - Use these in your response:\n"
             for c in stats["strong_correlations"]:
-                result += f"  • {c['pair']}: r = {c['r']}\n"
+                result += f"  - {c['pair']}: r = {c['r']}\n"
             result += "\n"
         
         if stats["moderate_correlations"]:
             result += "MODERATE CORRELATIONS:\n"
             for c in stats["moderate_correlations"][:5]:  # Top 5 moderate
-                result += f"  • {c['pair']}: r = {c['r']}\n"
+                result += f"  - {c['pair']}: r = {c['r']}\n"
         
         return result
     except Exception as e:
@@ -587,7 +589,7 @@ def create_boxplot(
             )
             
             for group_name, group_stats in sorted_groups:
-                result += f"📊 {group_name}:\n"
+                result += f"  {group_name}:\n"
                 result += f"   Count: {group_stats['count']:,} | Mean: {group_stats['mean']} | Median: {group_stats['median']}\n"
                 result += f"   Std: {group_stats['std']} | Range: {group_stats['min']} - {group_stats['max']}\n"
                 result += f"   IQR: {group_stats['q1']} - {group_stats['q3']}\n\n"
@@ -645,7 +647,7 @@ def create_bar_chart(
         
         result += "VALUE COUNTS:\n"
         for val, data in stats["value_counts"].items():
-            result += f"  • {val}: {data['count']:,} ({data['percentage']}%)\n"
+            result += f"  - {val}: {data['count']:,} ({data['percentage']}%)\n"
         
         return result
     except Exception as e:
@@ -696,7 +698,7 @@ def run_pca(
         
         result += "EXPLAINED VARIANCE BY COMPONENT:\n"
         for pc, var_info in stats["explained_variance"].items():
-            result += f"  • {pc}: {var_info['percentage']}% (cumulative: {var_info['cumulative']}%)\n"
+            result += f"  - {pc}: {var_info['percentage']}% (cumulative: {var_info['cumulative']}%)\n"
         
         result += f"\nComponents needed for 90% variance: {stats['components_for_90_variance']}\n"
         result += f"Components needed for 95% variance: {stats['components_for_95_variance']}\n\n"
@@ -708,7 +710,7 @@ def run_pca(
                 result += f"    - {f['feature']}: {f['loading']}\n"
         
         result += "\nPC columns (PC1, PC2, etc.) have been added to the dataframe."
-        result += "\n\n⚠️ NEXT STEP: Call create_pca_plot() to visualize the projection!"
+        result += "\n\nNEXT STEP: Call create_pca_plot() to visualize the projection!"
         
         return result
     except Exception as e:
@@ -756,7 +758,7 @@ def run_kmeans(
         
         result += "CLUSTER SIZES:\n"
         for cluster, info in stats["cluster_stats"].items():
-            result += f"  • {cluster}: {info['size']:,} samples ({info['percentage']}%)\n"
+            result += f"  - {cluster}: {info['size']:,} samples ({info['percentage']}%)\n"
         
         result += "\nDISTINGUISHING FEATURES BY CLUSTER:\n"
         for cluster, features in stats["distinguishing_features"].items():
@@ -765,7 +767,7 @@ def run_kmeans(
                 result += f"    - {f['feature']}: {f['direction']} (cluster mean: {f['cluster_mean']}, global: {f['global_mean']})\n"
         
         result += "\nA 'cluster' column has been added to the dataframe."
-        result += "\n\n⚠️ NEXT STEP: Call create_cluster_plot(x_column='PC1', y_column='PC2') to visualize!"
+        result += "\n\nNEXT STEP: Call create_cluster_plot(x_column='PC1', y_column='PC2') to visualize!"
         
         return result
     except Exception as e:
@@ -813,7 +815,7 @@ def find_optimal_clusters(
         result += f"SUGGESTED OPTIMAL K: {stats['suggested_k']}\n\n"
         result += "INERTIA BY K:\n"
         for k, inertia in zip(stats["k_values"], stats["inertias"]):
-            marker = " ← suggested" if k == stats["suggested_k"] else ""
+            marker = " <-- suggested" if k == stats["suggested_k"] else ""
             result += f"  k={k}: {inertia:,.0f}{marker}\n"
         
         return result
@@ -895,11 +897,11 @@ def create_cluster_plot(
         
         result += "CLUSTER SIZES:\n"
         for cluster, size in stats["cluster_sizes"].items():
-            result += f"  • {cluster}: {size:,}\n"
+            result += f"  - {cluster}: {size:,}\n"
         
         result += "\nCENTROIDS (in plot coordinates):\n"
         for cluster, centroid in stats["centroids"].items():
-            result += f"  • {cluster}: ({centroid['x']}, {centroid['y']})\n"
+            result += f"  - {cluster}: ({centroid['x']}, {centroid['y']})\n"
         
         return result
     except Exception as e:

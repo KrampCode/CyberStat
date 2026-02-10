@@ -148,7 +148,7 @@ def create_elbow_plot(k_values: list, inertias: list, suggested_k: int) -> tuple
         "suggested_k": suggested_k,
         "inertia_at_suggested_k": inertias[k_values.index(suggested_k)] if suggested_k in k_values else None,
         "inertia_reduction": {
-            f"k={k_values[i]}→{k_values[i+1]}": round(inertias[i] - inertias[i+1], 2)
+            f"k={k_values[i]}->{k_values[i+1]}": round(inertias[i] - inertias[i+1], 2)
             for i in range(len(k_values)-1)
         }
     }

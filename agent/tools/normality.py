@@ -41,5 +41,5 @@ p-value: {p_value:.4f}
 Skewness: {skewness:.3f} (0 = symmetric)
 Kurtosis: {kurtosis:.3f} (0 = normal tails)
 
-Interpretation: The data {'appears to be' if is_normal else 'does NOT appear to be'} normally distributed (α=0.05).
+Interpretation: The data {'appears to be' if is_normal else 'does NOT appear to be'} normally distributed (alpha=0.05).
 {'This supports using parametric tests.' if is_normal else 'Consider non-parametric tests or data transformation.'}"""

@@ -35,7 +35,7 @@ from components.chat import render_chat_history
 
 st.set_page_config(
     page_title="CyberStat - Data Analytics Agent",
-    page_icon="📊",
+    page_icon="CS",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -357,7 +357,7 @@ async def get_agent_response(user_message: str) -> str:
 # Initial Welcome Message (before layout to avoid rerun issues)
 # =============================================================================
 if not st.session_state.messages:
-    welcome = """Welcome to CyberStat! 📊
+    welcome = """Welcome to CyberStat!
 
 I'm your AI-powered data analytics assistant. Here's how to get started:
 
@@ -436,14 +436,14 @@ with chat_col:
                 # First plot in row
                 with col1:
                     img_bytes, description = plots_reversed[row_start]
-                    with st.expander(f"📊 {description[:40]}..." if len(description) > 40 else f"📊 {description}", expanded=True):
+                    with st.expander(f"{description[:40]}..." if len(description) > 40 else description, expanded=True):
                         st.image(img_bytes, use_container_width=True)
                 
                 # Second plot in row (if exists)
                 if row_start + 1 < len(plots_reversed):
                     with col2:
                         img_bytes, description = plots_reversed[row_start + 1]
-                        with st.expander(f"📊 {description[:40]}..." if len(description) > 40 else f"📊 {description}", expanded=True):
+                        with st.expander(f"{description[:40]}..." if len(description) > 40 else description, expanded=True):
                             st.image(img_bytes, use_container_width=True)
         
         # Button to clear plots
@@ -500,7 +500,7 @@ with panel_col:
     
     # Show data preview if data is loaded
     if st.session_state.df is not None:
-        with st.expander("📊 Data Preview", expanded=False):
+        with st.expander("Data Preview", expanded=False):
             st.dataframe(st.session_state.df.head(50), use_container_width=True)
     
     # Create a scrollable container for analysis results

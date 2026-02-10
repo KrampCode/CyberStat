@@ -123,8 +123,8 @@ def format_label(text: str) -> str:
     Format column names into clean, readable labels with proper title case.
     
     Transformations:
-    - snake_case → Title Case ("daily_steps" → "Daily Steps")
-    - camelCase → Title Case ("dailySteps" → "Daily Steps")  
+    - snake_case -> Title Case ("daily_steps" -> "Daily Steps")
+    - camelCase -> Title Case ("dailySteps" -> "Daily Steps")  
     - Handles common abbreviations (id, clv, pca, etc.)
     - Removes common prefixes (col_, feat_, etc.)
     - Applies proper title case (small words like "of", "the" stay lowercase)

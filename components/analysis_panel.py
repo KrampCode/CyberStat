@@ -78,16 +78,16 @@ def render_analysis_panel(state: AnalysisState) -> None:
     
     if state.findings:
         for i, finding in enumerate(state.findings):
-            # Color-code by importance
+            # Label by importance
             if finding.importance == "high":
-                icon = "🔴"
+                label = "[HIGH]"
             elif finding.importance == "medium":
-                icon = "🟡"
+                label = "[MED]"
             else:
-                icon = "🟢"
+                label = "[LOW]"
             
             # Only expand first finding to reduce clutter
-            with st.expander(f"{icon} {escape_latex(finding.title)}", expanded=(i == 0)):
+            with st.expander(f"{label} {escape_latex(finding.title)}", expanded=(i == 0)):
                 st.markdown(escape_latex(finding.description))
                 if finding.related_columns:
                     st.caption(f"Related: {', '.join(finding.related_columns)}")

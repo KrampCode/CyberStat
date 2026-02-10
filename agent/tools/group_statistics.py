@@ -65,7 +65,7 @@ def get_group_statistics(
     
     for stats in group_stats:
         result_lines.extend([
-            f"📊 {stats['name']}:",
+            f"  {stats['name']}:",
             f"   Count:  {stats['count']:,}",
             f"   Mean:   {stats['mean']:.2f}",
             f"   Median: {stats['median']:.2f}",
