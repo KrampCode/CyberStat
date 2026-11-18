@@ -300,7 +300,7 @@ def create_data_summary(df: pd.DataFrame, filename: str) -> DataSummary:
     """Create a DataSummary from a DataFrame."""
     
     numeric_cols = df.select_dtypes(include=['number']).columns.tolist()
-    categorical_cols = df.select_dtypes(include=['object', 'category']).columns.tolist()
+    categorical_cols = df.select_dtypes(include=['object', 'string', 'category']).columns.tolist()
     missing = {col: int(df[col].isna().sum()) for col in df.columns if df[col].isna().any()}
     
     return DataSummary(

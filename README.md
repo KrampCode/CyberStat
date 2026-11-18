@@ -19,7 +19,8 @@ A conversational statistical analyst powered by PydanticAI and Gemini.
 3. Configure your API key:
    ```bash
    copy .env.example .env
-   # Edit .env and add your Gemini API key
+   # Edit .env and set GOOGLE_API_KEY
+   # Optionally set CYBERSTAT_MODEL to any PydanticAI model string
    ```
 
 4. Run the app:
@@ -33,3 +34,13 @@ A conversational statistical analyst powered by PydanticAI and Gemini.
 2. Sign in with your Google account
 3. Click "Create API Key"
 4. Copy the key to your `.env` file
+
+## Running Tests
+
+The test suite checks the statistical tools against scipy/sklearn reference values and
+exercises the agent's tool wiring with scripted models (no API key needed):
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
