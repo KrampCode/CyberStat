@@ -1,5 +1,5 @@
 # PydanticAI with Google/Gemini support
-pydantic-ai[google]>=0.0.20
+pydantic-ai[google]>=2.70,<3
 
 # Web UI
 streamlit>=1.40.0

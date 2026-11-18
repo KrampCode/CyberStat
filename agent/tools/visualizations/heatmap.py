@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.colors import LinearSegmentedColormap
 from . import THEME, format_label
+from ..derived import select_numeric
 
 
 def create_correlation_heatmap(df: pd.DataFrame) -> tuple[bytes, str, dict]:
@@ -20,7 +21,7 @@ def create_correlation_heatmap(df: pd.DataFrame) -> tuple[bytes, str, dict]:
     Returns:
         Tuple of (image_bytes, description, statistics_dict)
     """
-    numeric_df = df.select_dtypes(include=[np.number])
+    numeric_df = select_numeric(df)
     
     if len(numeric_df.columns) < 2:
         raise ValueError("Need at least 2 numeric columns for correlation heatmap")

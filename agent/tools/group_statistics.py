@@ -87,7 +87,7 @@ def get_group_statistics(
         
         if highest[1] != lowest[1]:
             diff = highest[1] - lowest[1]
-            pct_diff = (diff / lowest[1] * 100) if lowest[1] != 0 else float('inf')
+            pct_diff = (diff / abs(lowest[1]) * 100) if lowest[1] != 0 else float('inf')
             
             result_lines.append(f"Highest mean: {highest[0]} ({highest[1]:.2f})")
             result_lines.append(f"Lowest mean:  {lowest[0]} ({lowest[1]:.2f})")

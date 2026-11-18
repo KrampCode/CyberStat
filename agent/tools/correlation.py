@@ -1,7 +1,8 @@
 """Correlation calculation tool."""
 
 import pandas as pd
-import numpy as np
+
+from .derived import select_numeric
 
 
 def calculate_correlation(df: pd.DataFrame, method: str = "pearson") -> str:
@@ -15,7 +16,7 @@ def calculate_correlation(df: pd.DataFrame, method: str = "pearson") -> str:
     Returns:
         Correlation matrix as formatted string, plus notable correlations
     """
-    numeric_df = df.select_dtypes(include=[np.number])
+    numeric_df = select_numeric(df)
     
     if numeric_df.empty:
         return "No numeric columns found for correlation analysis."

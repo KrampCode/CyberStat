@@ -1,9 +1,13 @@
 """PCA (Principal Component Analysis) tool."""
 
+import re
+
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+
+from .derived import get_derived_columns, mark_derived, select_numeric
 
 
 def perform_pca(
@@ -22,14 +26,7 @@ def perform_pca(
     Returns:
         Tuple of (transformed_df with PC columns, statistics_dict)
     """
-    # Select columns
-    if columns:
-        missing = [c for c in columns if c not in df.columns]
-        if missing:
-            raise ValueError(f"Columns not found: {missing}")
-        numeric_df = df[columns].select_dtypes(include=[np.number])
-    else:
-        numeric_df = df.select_dtypes(include=[np.number])
+    numeric_df = select_numeric(df, columns)
     
     if len(numeric_df.columns) < 2:
         raise ValueError("Need at least 2 numeric columns for PCA")
@@ -56,12 +53,16 @@ def perform_pca(
     
     # Create result dataframe with PC columns
     pc_columns = [f'PC{i+1}' for i in range(n_components)]
-    result_df = df.copy()
+    
+    # Drop PC columns from any previous run so stale components don't linger
+    stale_pcs = [c for c in get_derived_columns(df) if re.fullmatch(r"PC\d+", c)]
+    result_df = df.drop(columns=stale_pcs)
     
     # Add PC columns (NaN for rows that were dropped)
     for i, col in enumerate(pc_columns):
         result_df[col] = np.nan
         result_df.loc[clean_df.index, col] = transformed[:, i]
+    mark_derived(result_df, pc_columns)
     
     # Build statistics
     explained_var = pca.explained_variance_ratio_

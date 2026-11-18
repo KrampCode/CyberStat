@@ -199,41 +199,49 @@ references (a DataFrame, a list). They don't need validation or serialization.
 ### Concept 2: Agent Creation
 
 ```python
+MODEL = os.getenv("CYBERSTAT_MODEL", "google:gemini-3-pro-preview")
+
 analyst_agent = Agent(
-    model="google-gla:gemini-3-pro-preview",
+    model=MODEL,
     system_prompt=SYSTEM_PROMPT,
     deps_type=AnalysisDependencies,
+    defer_model_check=True,
 )
 ```
 
-Three things happen here:
+Four things happen here:
 
-1. **`model`** — which LLM to use. `google-gla:` tells PydanticAI to use Google/Gemini.
+1. **`model`** — which LLM to use, as a PydanticAI `provider:model` string. `google:` uses
+   Gemini; override it with the `CYBERSTAT_MODEL` env var to try another provider.
 2. **`system_prompt`** — instructions shaping agent behavior. Sent with every LLM call.
 3. **`deps_type`** — tells PydanticAI what type dependencies will be, enabling type-checking.
+4. **`defer_model_check`** — resolve the model on first run, so the module (and the test
+   suite) can import without an API key.
 
 The agent is created **once at module import time** (not per-request). It's stateless — all
 mutable state lives in the dependencies.
 
-### Concept 3: Tool Registration (`@agent.tool`)
+### Concept 3: Tool Registration (`@data_tool`)
 
-Every function decorated with `@analyst_agent.tool` becomes a tool the LLM can call:
+Every function registered with `@analyst_agent.tool` becomes a tool the LLM can call. Tools
+that operate on the dataset use the `@data_tool()` wrapper, which registers the tool and
+handles the checks every analysis tool needs: data is loaded, plot storage exists
+(`@data_tool(needs_plots=True)`), and exceptions are returned to the LLM as text it can
+recover from (e.g. a misspelled column name) instead of crashing the run:
 
 ```python
-@analyst_agent.tool
+@data_tool()
 def describe_data(ctx: RunContext[AnalysisDependencies]) -> str:
     """
     Get a comprehensive statistical summary of the loaded dataset.
     Use this to understand the overall structure and distributions in the data.
     """
-    if ctx.deps.df is None:
-        return "No data loaded. Please ask the user to upload a dataset first."
-
-    if ctx.deps.state:
-        ctx.deps.state.add_activity("Generated data summary", "Running describe() on all columns")
-
+    log_activity(ctx, "Generated data summary", "Running describe() on all columns")
     return tools.describe_dataframe(ctx.deps.df)
 ```
+
+`data_tool` uses `functools.wraps`, so PydanticAI still sees the original signature and
+docstring when it builds the tool schema.
 
 **How PydanticAI uses this:**
 
@@ -260,14 +268,14 @@ LLM:         uses the stats to write a natural language response
 When a tool has extra parameters, PydanticAI generates a JSON schema for the LLM:
 
 ```python
-@analyst_agent.tool
+@data_tool()
 def compare_groups(
     ctx: RunContext[AnalysisDependencies],  # ← hidden from LLM, injected by PydanticAI
     numeric_column: str,                     # ← visible to LLM as {"type": "string"}
     group_column: str                        # ← visible to LLM as {"type": "string"}
 ) -> str:
     """
-    Compare a numeric variable across two groups using a t-test.
+    Compare a numeric variable across two groups using Welch's t-test.
 
     Args:
         numeric_column: The numeric column to compare (e.g., 'salary', 'score')
@@ -384,7 +392,7 @@ These take a DataFrame and return a formatted string. No side effects.
 | `describe.py`        | `describe_dataframe(df)`          | `df.describe()` formatted as string       |
 | `column_info.py`     | `get_column_info(df, col)`        | Type, missing, stats, outlier count       |
 | `correlation.py`     | `calculate_correlation(df, method)` | Correlation matrix + notable pairs      |
-| `ttest.py`           | `perform_ttest(df, col, group_col)` | Independent t-test with Cohen's d       |
+| `ttest.py`           | `perform_ttest(df, col, group_col)` | Welch's t-test with 95% CI, Cohen's d, Hedges' g |
 | `normality.py`       | `check_normality(df, col)`        | Shapiro-Wilk test                         |
 | `value_counts.py`    | `get_value_counts(df, col, top_n)` | Frequency table                          |
 | `group_statistics.py`| `get_group_statistics(df, num, grp)` | Per-group mean/median/std/IQR + comparison |
@@ -396,8 +404,8 @@ These return `tuple[pd.DataFrame, dict]` — a new DataFrame with added columns 
 | File        | Function                        | Returns                                    |
 |-------------|---------------------------------|--------------------------------------------|
 | `pca.py`    | `perform_pca(df, columns, n)`   | df + PC1, PC2... columns; variance stats   |
-| `kmeans.py` | `perform_kmeans(df, columns, k)` | df + `cluster` column; cluster profiles   |
-| `kmeans.py` | `find_optimal_k(df, cols, max)` | dict with inertia curve + suggested k      |
+| `kmeans.py` | `perform_kmeans(df, columns, k)` | df + `cluster` column; cluster profiles, silhouette |
+| `kmeans.py` | `find_optimal_k(df, cols, max)` | dict with inertia + silhouette per k, suggested k |
 
 **Key pattern:** These tools mutate `ctx.deps.df` in the analyst wrapper:
 
@@ -405,8 +413,19 @@ These return `tuple[pd.DataFrame, dict]` — a new DataFrame with added columns 
 ctx.deps.df = result_df  # PCA columns / cluster labels now available for next tools
 ```
 
-That's how PCA columns become available for clustering, and cluster labels become available
-for visualization. The modified `deps.df` flows back to `app.py` via `run_analyst`.
+That's how PC columns and cluster labels become available for visualization and grouping.
+The modified `deps.df` flows back to `app.py` via `run_analyst`.
+
+**Derived columns:** PCA and K-means record the columns they add in `df.attrs` (see
+`tools/derived.py`). Tools that default to "all numeric columns" — correlations, describe,
+the heatmap, a second PCA or clustering run — call `select_numeric()` / `drop_derived()`,
+which exclude them. Without this, a correlation matrix computed after PCA would include
+PC1..PCn, and re-clustering would fit on the original features *plus* the previous
+components. Derived columns can still be used by naming them explicitly (`columns="PC1,PC2"`).
+
+**Choosing k:** `find_optimal_k` uses the mean silhouette coefficient as the primary
+criterion and reports the elbow (Kneedle method) for comparison. A best silhouette below
+0.25 means the data has no meaningful cluster structure, and the agent is instructed to say so.
 
 ### Tier C: Visualization Functions (return image bytes + stats)
 
@@ -426,7 +445,7 @@ Every viz function returns `tuple[bytes, str, dict]`:
 | `pca_plot.py`     | `create_pca_scatter()`        | PCA 2D projection               |
 | `pca_plot.py`     | `create_scree_plot()`         | Variance explained per component|
 | `cluster_plot.py` | `create_cluster_scatter()`    | Cluster assignments on 2D space |
-| `cluster_plot.py` | `create_elbow_plot()`         | Optimal k selection             |
+| `cluster_plot.py` | `create_elbow_plot()`         | Inertia curve for choosing k    |
 | `cluster_plot.py` | `create_cluster_profile_chart()` | Feature means by cluster     |
 
 The analyst tool wrappers append `(bytes, description)` to `ctx.deps.plots`, then return the
@@ -604,6 +623,8 @@ would be stateless and the agent would forget prior context.
 CyberStat/
 ├── app.py                          # Streamlit entry point, layout, session state
 ├── requirements.txt                # Python dependencies
+├── requirements-dev.txt            # + pytest
+├── pytest.ini                      # Test configuration
 ├── .env.example                    # API key template
 ├── .gitignore                      # Secrets and build artifacts excluded
 ├── README.md                       # User-facing documentation
@@ -625,12 +646,13 @@ CyberStat/
 │       ├── __init__.py             # Re-exports all tool functions
 │       ├── column_info.py          # Single-column analysis
 │       ├── correlation.py          # Correlation matrix
+│       ├── derived.py              # Tracks PC/cluster columns so they don't leak into analyses
 │       ├── describe.py             # df.describe() wrapper
 │       ├── group_statistics.py     # Per-group stats comparison
-│       ├── kmeans.py               # K-means clustering + elbow method
+│       ├── kmeans.py               # K-means + k selection (silhouette, Kneedle elbow)
 │       ├── normality.py            # Shapiro-Wilk test
 │       ├── pca.py                  # Principal Component Analysis
-│       ├── ttest.py                # Independent samples t-test
+│       ├── ttest.py                # Welch's t-test with CI and effect sizes
 │       ├── value_counts.py         # Frequency distribution
 │       │
 │       └── visualizations/
@@ -655,6 +677,8 @@ CyberStat/
 │   ├── iris.csv
 │   ├── sales_data.csv
 │   └── survey_data.csv
+│
+├── tests/                          # pytest suite: stat tools vs scipy/sklearn, agent wiring
 │
 ├── docs/
 │   ├── detailed_architecture_overview.md   # ← This file
