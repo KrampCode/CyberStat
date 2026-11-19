@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 
+from .multiple_testing import InferenceResult, PValue
+
 
 def cohens_d(a: pd.Series, b: pd.Series) -> float:
     """Cohen's d using the n-weighted pooled standard deviation."""
@@ -36,7 +38,7 @@ def perform_ttest(
     group_column: str,
     equal_var: bool = False,
     alpha: float = 0.05
-) -> str:
+) -> InferenceResult:
     """
     Perform an independent samples t-test comparing a numeric column across two groups.
 
@@ -51,25 +53,26 @@ def perform_ttest(
         alpha: Significance level; the confidence interval is at 1 - alpha
 
     Returns:
-        T-test results with confidence interval, effect size, and interpretation
+        T-test results with confidence interval, effect size, and interpretation,
+        plus the p-value for session-wide multiple-testing correction
     """
     if column not in df.columns:
-        return f"Error: Column '{column}' not found."
+        return InferenceResult(f"Error: Column '{column}' not found.")
     if group_column not in df.columns:
-        return f"Error: Group column '{group_column}' not found."
+        return InferenceResult(f"Error: Group column '{group_column}' not found.")
     if not pd.api.types.is_numeric_dtype(df[column]):
-        return f"Error: Column '{column}' is not numeric."
+        return InferenceResult(f"Error: Column '{column}' is not numeric.")
 
     # Sort so the direction of the difference is deterministic
     groups = sorted(df[group_column].dropna().unique(), key=str)
     if len(groups) != 2:
-        return f"T-test requires exactly 2 groups. Found {len(groups)}: {list(groups)}"
+        return InferenceResult(f"T-test requires exactly 2 groups. Found {len(groups)}: {list(groups)}")
 
     group1_data = df[df[group_column] == groups[0]][column].dropna()
     group2_data = df[df[group_column] == groups[1]][column].dropna()
     n1, n2 = len(group1_data), len(group2_data)
     if n1 < 2 or n2 < 2:
-        return f"T-test requires at least 2 observations per group. Found n={n1} and n={n2}."
+        return InferenceResult(f"T-test requires at least 2 observations per group. Found n={n1} and n={n2}.")
 
     result = stats.ttest_ind(group1_data, group2_data, equal_var=equal_var)
     ci = result.confidence_interval(confidence_level=1 - alpha)
@@ -83,7 +86,7 @@ def perform_ttest(
     significant = result.pvalue < alpha
     ci_pct = f"{(1 - alpha) * 100:g}%"
 
-    return f"""T-Test Results: {column} by {group_column}
+    text = f"""T-Test Results: {column} by {group_column}
 Test: {test_name}
 
 Group '{groups[0]}': n={n1}, mean={group1_data.mean():.2f}, std={group1_data.std():.2f}
@@ -98,3 +101,7 @@ Cohen's d: {d:.3f} ({effect_interp} effect) | Hedges' g: {g:.3f}
 Interpretation: The difference is {'statistically significant' if significant else 'not statistically significant'} at alpha={alpha} with a {effect_interp} effect size.
 {'The CI excludes 0.' if significant else 'The CI includes 0, so no difference is a plausible explanation of the data.'}
 Report the CI and effect size alongside the p-value - statistical significance alone does not imply practical importance."""
+    
+    hypothesis = f"{column} differs between '{groups[0]}' and '{groups[1]}' ({group_column})"
+    test_short = "Student's t-test" if equal_var else "Welch's t-test"
+    return InferenceResult(text, [PValue(test_short, hypothesis, float(result.pvalue))])

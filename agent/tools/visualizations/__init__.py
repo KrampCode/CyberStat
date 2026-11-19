@@ -213,6 +213,7 @@ from .boxplot import create_box_plot
 from .bar_chart import create_bar_chart
 from .pca_plot import create_pca_scatter, create_scree_plot
 from .cluster_plot import create_cluster_scatter, create_elbow_plot, create_cluster_profile_chart
+from .residual_plot import create_residual_plots
 
 __all__ = [
     "format_label",
@@ -228,4 +229,6 @@ __all__ = [
     "create_cluster_scatter",
     "create_elbow_plot",
     "create_cluster_profile_chart",
+    # Regression diagnostics
+    "create_residual_plots",
 ]

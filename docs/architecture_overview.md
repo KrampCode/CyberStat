@@ -1,6 +1,6 @@
 # CyberStat — Detailed Architecture Overview
 
-> A complete walkthrough of how the CyberStat data analytics agent works,  
+> A complete walkthrough of how the CyberStat data analytics agent works,
 > from user interaction to LLM tool calls and back.
 
 ---
@@ -392,10 +392,40 @@ These take a DataFrame and return a formatted string. No side effects.
 | `describe.py`        | `describe_dataframe(df)`          | `df.describe()` formatted as string       |
 | `column_info.py`     | `get_column_info(df, col)`        | Type, missing, stats, outlier count       |
 | `correlation.py`     | `calculate_correlation(df, method)` | Correlation matrix + notable pairs      |
-| `ttest.py`           | `perform_ttest(df, col, group_col)` | Welch's t-test with 95% CI, Cohen's d, Hedges' g |
 | `normality.py`       | `check_normality(df, col)`        | Shapiro-Wilk test                         |
 | `value_counts.py`    | `get_value_counts(df, col, top_n)` | Frequency table                          |
 | `group_statistics.py`| `get_group_statistics(df, num, grp)` | Per-group mean/median/std/IQR + comparison |
+
+### Tier A2: Inferential Functions (return `InferenceResult`)
+
+These return an `InferenceResult`: the formatted text plus a list of `PValue`s, one per
+hypothesis tested. The agent wrapper passes the result through `record_tests()`, which
+registers each p-value in `AnalysisState.hypothesis_tests` and appends Benjamini-Hochberg
+adjusted p-values computed across **every test run this session**.
+
+| File                  | Function                                | What It Does |
+|-----------------------|-----------------------------------------|--------------|
+| `ttest.py`            | `perform_ttest(df, col, group_col)`     | Welch's t-test with CI, Cohen's d, Hedges' g |
+| `group_comparison.py` | `compare_groups(df, col, group_col, method)` | Checks per-group normality, picks Welch t / Mann-Whitney / Welch ANOVA / Kruskal-Wallis, Holm post-hoc |
+| `independence.py`     | `independence_test(df, a, b)`           | Chi-square or Fisher's exact, Cramér's V, adjusted residuals |
+| `regression.py`       | `fit_ols(df, target, predictors)`       | OLS + Breusch-Pagan (→ HC3), RESET, VIF, Jarque-Bera, Cook's D |
+| `multiple_testing.py` | `benjamini_hochberg`, `holm`, `summarize_session_tests` | Corrections and the session summary |
+
+**Why session-wide correction?** An agent answers questions by running tests, so over one
+conversation it may run dozens. At α = 0.05, about one in twenty true null hypotheses comes
+back "significant" by chance. BH controls the false discovery rate across the whole session.
+Adjusted p-values are recomputed as tests accumulate, so a borderline early result can lose
+significance later, and the panel's Hypothesis Tests section shows that live.
+
+**Two levels of correction:** post-hoc pairwise tests inside `compare_groups` are
+Holm-corrected within their family (they answer one question: *which* groups differ), and
+only the omnibus p-value is registered with the session. Regression registers one p-value per
+non-intercept coefficient, since each is a separate claim the agent might make.
+
+**Test selection rule** (`check_group_normality`): a group is "normal enough" if Shapiro-Wilk
+doesn't reject, or if n ≥ 30 and |skew| ≤ 1, where the central limit theorem makes the mean
+approximately normal. Shapiro-Wilk alone would reject trivially non-normal large samples
+and push every real-world comparison to rank-based tests.
 
 ### Tier B: ML Functions (return modified DataFrame + stats)
 
@@ -640,6 +670,7 @@ CyberStat/
 │   │   ├── chat_message.py         # ChatMessage
 │   │   ├── data_summary.py         # DataSummary
 │   │   ├── finding.py              # Finding
+│   │   ├── hypothesis_test.py      # HypothesisTest (session test registry)
 │   │   └── recommendation.py       # Recommendation
 │   │
 │   └── tools/
@@ -648,10 +679,14 @@ CyberStat/
 │       ├── correlation.py          # Correlation matrix
 │       ├── derived.py              # Tracks PC/cluster columns so they don't leak into analyses
 │       ├── describe.py             # df.describe() wrapper
+│       ├── group_comparison.py     # Assumption-aware test selection + post-hoc
 │       ├── group_statistics.py     # Per-group stats comparison
+│       ├── independence.py         # Chi-square / Fisher's exact
 │       ├── kmeans.py               # K-means + k selection (silhouette, Kneedle elbow)
+│       ├── multiple_testing.py     # InferenceResult, BH/Holm, session summary
 │       ├── normality.py            # Shapiro-Wilk test
 │       ├── pca.py                  # Principal Component Analysis
+│       ├── regression.py           # OLS with assumption diagnostics
 │       ├── ttest.py                # Welch's t-test with CI and effect sizes
 │       ├── value_counts.py         # Frequency distribution
 │       │
@@ -663,6 +698,7 @@ CyberStat/
 │           ├── heatmap.py          # Correlation heatmap
 │           ├── histogram.py        # Histogram with mean/median lines
 │           ├── pca_plot.py         # PCA scatter, scree plot
+│           ├── residual_plot.py    # Residuals vs fitted, Q-Q
 │           └── scatter.py          # Scatter plot with trend line
 │
 ├── components/

@@ -47,7 +47,7 @@ class TestEffectSize:
 
 class TestPerformTtest:
     def test_defaults_to_welch(self, two_groups):
-        output = perform_ttest(two_groups, "value", "group")
+        output = perform_ttest(two_groups, "value", "group").text
         a = two_groups.loc[two_groups.group == "A", "value"]
         b = two_groups.loc[two_groups.group == "B", "value"]
         welch = stats.ttest_ind(a, b, equal_var=False)
@@ -59,7 +59,7 @@ class TestPerformTtest:
         assert abs(welch.statistic - student.statistic) > 0.1
 
     def test_confidence_interval_matches_welch_satterthwaite(self, two_groups):
-        output = perform_ttest(two_groups, "value", "group")
+        output = perform_ttest(two_groups, "value", "group").text
         a = two_groups.loc[two_groups.group == "A", "value"]
         b = two_groups.loc[two_groups.group == "B", "value"]
 
@@ -75,12 +75,12 @@ class TestPerformTtest:
         assert _extract(r"df = ([\d.]+)", output) == pytest.approx(dof, abs=0.1)
 
     def test_student_option(self, two_groups):
-        output = perform_ttest(two_groups, "value", "group", equal_var=True)
+        output = perform_ttest(two_groups, "value", "group", equal_var=True).text
         assert "Student" in output
 
     def test_group_order_is_deterministic(self):
         df = pd.DataFrame({"v": [10.0, 11, 12, 1, 2, 3], "g": ["z", "z", "z", "a", "a", "a"]})
-        output = perform_ttest(df, "v", "g")
+        output = perform_ttest(df, "v", "g").text
         # Groups are sorted, so the difference is 'a' - 'z' regardless of row order
         assert "Mean difference ('a' - 'z'): -9.00" in output
 
@@ -90,19 +90,30 @@ class TestPerformTtest:
             "v": rng.normal(0, 1, 200),
             "g": ["x", "y"] * 100,
         })
-        output = perform_ttest(df, "v", "g")
+        output = perform_ttest(df, "v", "g").text
         assert "not statistically significant" in output
         assert "CI includes 0" in output
 
     def test_requires_two_groups(self, employees):
-        assert "exactly 2 groups" in perform_ttest(employees, "salary", "department")
+        assert "exactly 2 groups" in perform_ttest(employees, "salary", "department").text
 
     def test_requires_two_observations_per_group(self):
         df = pd.DataFrame({"v": [1.0, 2.0, 3.0], "g": ["a", "a", "b"]})
-        assert "at least 2 observations" in perform_ttest(df, "v", "g")
+        assert "at least 2 observations" in perform_ttest(df, "v", "g").text
 
     def test_rejects_non_numeric_column(self, employees):
-        assert "not numeric" in perform_ttest(employees, "department", "gender")
+        assert "not numeric" in perform_ttest(employees, "department", "gender").text
 
     def test_missing_column(self, employees):
-        assert "not found" in perform_ttest(employees, "nope", "gender")
+        assert "not found" in perform_ttest(employees, "nope", "gender").text
+
+    def test_returns_p_value_for_registry(self, two_groups):
+        result = perform_ttest(two_groups, "value", "group")
+        a = two_groups.loc[two_groups.group == "A", "value"]
+        b = two_groups.loc[two_groups.group == "B", "value"]
+        [pv] = result.p_values
+        assert pv.test == "Welch's t-test"
+        assert pv.p_value == pytest.approx(stats.ttest_ind(a, b, equal_var=False).pvalue)
+
+    def test_errors_produce_no_p_values(self, employees):
+        assert perform_ttest(employees, "salary", "department").p_values == []

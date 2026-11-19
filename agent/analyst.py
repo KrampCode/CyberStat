@@ -19,6 +19,7 @@ from pydantic_ai import Agent, RunContext
 from .models import AnalysisState
 from . import tools
 from .tools.derived import get_derived_columns
+from .tools.multiple_testing import ALPHA
 
 load_dotenv()
 
@@ -33,7 +34,7 @@ NO_DATA_MESSAGE = "No data loaded. Please ask the user to upload a dataset first
 class AnalysisDependencies:
     """
     Dependencies passed to the agent and its tools via RunContext.
-    
+
     Provides access to:
     - The current dataframe being analyzed
     - The analysis state (to log activities, add findings)
@@ -44,7 +45,7 @@ class AnalysisDependencies:
     plots: Optional[list] = None  # List of (image_bytes, description) tuples
 
 
-SYSTEM_PROMPT = """You are a friendly and insightful statistical analyst assistant. 
+SYSTEM_PROMPT = """You are a friendly and insightful statistical analyst assistant.
 Your role is to help users understand their data through conversation.
 
 ## Your Capabilities
@@ -68,10 +69,10 @@ Before stating anything about the data, you MUST:
 1. **For group comparisons**: ALWAYS use `get_group_stats()` or `compare_groups()` FIRST
    - Never say groups are "similar" or "different" without actual numbers
    - Always cite the specific means/medians when comparing
-   
+
 2. **For correlations**: ALWAYS use `get_correlations()` or check scatter plot stats
    - Never guess at correlation strength - use the actual r value
-   
+
 3. **For distributions**: ALWAYS use `describe_data()` or histogram stats
    - Never describe shape without actual skewness/mean/median values
 
@@ -103,12 +104,27 @@ For example:
 - Comparing groups? Create a box plot AND cite the statistics it returns.
 
 ## Statistical Testing
-- `compare_groups()` runs Welch's t-test (no equal-variance assumption) and reports the
-  mean difference with a 95% confidence interval and Cohen's d / Hedges' g.
+Pick the tool that matches the question:
+- Numeric outcome across groups -> `compare_groups()`. It checks normality per group and
+  chooses Welch's t-test / Mann-Whitney U (2 groups) or Welch's ANOVA / Kruskal-Wallis (3+),
+  with Holm-corrected post-hoc tests. Explain to the user which test it chose and why.
+  When it chose a rank-based test, describe medians, not means.
+- Two categorical variables -> `test_independence()` (chi-square / Fisher's exact).
+- Several predictors, or "after controlling for X" -> `run_regression()`. Read its
+  assumption diagnostics and mention any that failed. Coefficients are associations
+  adjusted for the other predictors - never describe them as causal effects.
+- Use `test_normality()` only when the user asks about a distribution's shape;
+  `compare_groups()` already checks normality.
+
+Reporting rules:
 - Always report the effect size and CI, not just the p-value. A significant p-value with a
   negligible effect size is not a practically important difference.
-- Use `test_normality()` to inform test choice, but note that with large samples the
-  Shapiro-Wilk test flags trivial departures - judge by skewness/kurtosis too.
+- **Multiple testing:** every p-value is registered with the session, and each test result
+  includes a Benjamini-Hochberg adjusted p-value across all tests run so far. Base claims of
+  significance on the ADJUSTED p-value. After running several tests, call
+  `get_multiple_testing_summary()` before summarizing conclusions.
+- Don't go fishing: run the tests that answer the user's question rather than testing
+  every pair of variables.
 
 ## Machine Learning Tools (PCA & Clustering)
 Use these when the user asks about segments, groupings, structure, or dimensionality -
@@ -172,7 +188,7 @@ def log_activity(ctx: RunContext[AnalysisDependencies], action: str, details: Op
 def data_tool(needs_plots: bool = False) -> Callable:
     """
     Register an agent tool that operates on the loaded dataframe.
-    
+
     Handles the checks every analysis tool needs: that data is loaded, that plot
     storage exists (for visualization tools), and that errors are returned to the
     model as text it can recover from rather than crashing the run.
@@ -190,6 +206,41 @@ def data_tool(needs_plots: bool = False) -> Callable:
                 return f"Error in {func.__name__}: {e}"
         return analyst_agent.tool(wrapper)
     return decorator
+
+
+def _parse_columns(columns: str) -> Optional[list[str]]:
+    """Parse a comma-separated column list; empty means 'all numeric'."""
+    return [c.strip() for c in columns.split(",") if c.strip()] or None
+
+
+def record_tests(ctx: RunContext[AnalysisDependencies], result: tools.InferenceResult) -> str:
+    """
+    Register a result's p-values with the session and append their
+    Benjamini-Hochberg adjusted values across every test run so far.
+    """
+    state = ctx.deps.state
+    if state is None or not result.p_values:
+        return result.text
+
+    for pv in result.p_values:
+        state.add_hypothesis_test(pv.test, pv.hypothesis, pv.p_value)
+
+    all_tests = state.hypothesis_tests
+    adjusted = tools.benjamini_hochberg([t.p_value for t in all_tests])
+    new = list(zip(all_tests, adjusted))[-len(result.p_values):]
+    first = len(all_tests) - len(new) + 1
+    numbering = f"#{first}" if len(new) == 1 else f"#{first}-{len(all_tests)}"
+
+    lines = [
+        "",
+        "",
+        f"MULTIPLE TESTING: test {numbering} of {len(all_tests)} this session. "
+        "Benjamini-Hochberg adjusted p-values across all tests so far:",
+    ]
+    for t, p_adj in new:
+        status = "significant" if p_adj < ALPHA else "NOT significant"
+        lines.append(f"  - {t.hypothesis}: adjusted p = {p_adj:.4g} ({status} after correction)")
+    return result.text + "\n".join(lines)
 
 
 # =============================================================================
@@ -239,19 +290,57 @@ def get_correlations(
 def compare_groups(
     ctx: RunContext[AnalysisDependencies],
     numeric_column: str,
-    group_column: str
+    group_column: str,
+    method: str = "auto"
 ) -> str:
     """
-    Compare a numeric variable across two groups using Welch's t-test.
-    Useful for answering questions like "Is there a significant difference in X between groups A and B?"
-    Returns the mean difference with a 95% confidence interval and effect size (Cohen's d, Hedges' g).
+    Test whether a numeric variable differs across groups (2 or more).
+    Checks normality per group and selects the test automatically:
+    Welch's t-test or Mann-Whitney U for 2 groups, Welch's ANOVA or Kruskal-Wallis for 3+,
+    with Holm-corrected pairwise post-hoc tests when a 3+ group test is significant.
+    Returns assumption checks, effect sizes, and confidence intervals.
 
     Args:
         numeric_column: The numeric column to compare (e.g., 'salary', 'score')
-        group_column: The categorical column that defines the groups (must have exactly 2 unique values)
+        group_column: The categorical column that defines the groups
+        method: 'auto' (recommended), or force 'welch', 'mann_whitney', 'anova', or 'kruskal'
     """
-    log_activity(ctx, f"Compared {numeric_column} across {group_column}", "Running Welch's t-test")
-    return tools.perform_ttest(ctx.deps.df, numeric_column, group_column)
+    result = tools.compare_groups(ctx.deps.df, numeric_column, group_column, method)
+    test_used = result.p_values[0].test if result.p_values else None
+    log_activity(ctx, f"Compared {numeric_column} across {group_column}", test_used)
+    return record_tests(ctx, result)
+
+
+@data_tool()
+def test_independence(
+    ctx: RunContext[AnalysisDependencies],
+    column_a: str,
+    column_b: str
+) -> str:
+    """
+    Test whether two categorical variables are associated (e.g., "Does churn depend on plan type?").
+    Uses a chi-square test, or Fisher's exact test for small 2x2 tables.
+    Returns Cramer's V effect size and the specific category combinations driving the association.
+
+    Args:
+        column_a: First categorical column
+        column_b: Second categorical column
+    """
+    result = tools.independence_test(ctx.deps.df, column_a, column_b)
+    log_activity(ctx, f"Tested independence: {column_a} x {column_b}")
+    return record_tests(ctx, result)
+
+
+@analyst_agent.tool
+def get_multiple_testing_summary(ctx: RunContext[AnalysisDependencies]) -> str:
+    """
+    List every hypothesis test run this session with raw and Benjamini-Hochberg adjusted p-values.
+    Use this before summarizing conclusions after running several tests, to report which
+    results survive correction for multiple comparisons.
+    """
+    if ctx.deps.state is None:
+        return "No analysis state available."
+    return tools.summarize_session_tests(ctx.deps.state.hypothesis_tests)
 
 
 @data_tool()
@@ -454,6 +543,7 @@ def create_scatter(
     image_bytes, description, stats = tools.create_scatter_plot(ctx.deps.df, x_column, y_column, color)
     ctx.deps.plots.append((image_bytes, description))
     log_activity(ctx, f"Created scatter plot: {y_column} vs {x_column}")
+    p_values = []
 
     # Build response with correlation statistics
     result = f"Scatter plot created ({y_column} vs {x_column}) - visible in Visualizations panel.\n\n"
@@ -470,10 +560,11 @@ def create_scatter(
 REGRESSION:
 - {reg['interpretation']}
 - Slope: {reg['slope']} | Intercept: {reg['intercept']}"""
+        p_values.append(tools.PValue("Pearson correlation", f"{x_column} is correlated with {y_column}", corr["p_value"]))
     else:
         result += "Insufficient data points for correlation analysis."
 
-    return result
+    return record_tests(ctx, tools.InferenceResult(result, p_values))
 
 
 @data_tool(needs_plots=True)
@@ -597,12 +688,43 @@ def create_bar_chart(
 
 
 # =============================================================================
-# Machine Learning Tools
+# Regression
 # =============================================================================
 
-def _parse_columns(columns: str) -> Optional[list[str]]:
-    """Parse a comma-separated column list; empty means 'all numeric'."""
-    return [c.strip() for c in columns.split(",") if c.strip()] or None
+@data_tool(needs_plots=True)
+def run_regression(
+    ctx: RunContext[AnalysisDependencies],
+    target: str,
+    predictors: str
+) -> str:
+    """
+    Fit a multiple linear regression (OLS) of a numeric target on one or more predictors.
+    Use this to estimate how much each predictor is associated with the target while
+    controlling for the others (e.g., "Does gender predict salary after accounting for experience?").
+    Categorical predictors are dummy-coded automatically.
+    Runs assumption diagnostics (heteroscedasticity, linearity, multicollinearity, residual
+    normality, influential points), switches to robust standard errors when needed, and
+    creates a residual diagnostic plot.
+
+    Args:
+        target: The numeric outcome column
+        predictors: Comma-separated predictor columns (avoid IDs and derived PC/cluster columns)
+    """
+    predictor_list = _parse_columns(predictors) or []
+    result, fit = tools.fit_ols(ctx.deps.df, target, predictor_list)
+
+    if fit is not None:
+        image_bytes, description, _ = tools.create_residual_plots(fit.fittedvalues, fit.resid, target)
+        ctx.deps.plots.append((image_bytes, description))
+        result.text += "\n\nResidual diagnostic plots added to the Visualizations panel."
+
+    log_activity(ctx, f"Regression: {target} ~ {', '.join(predictor_list)}")
+    return record_tests(ctx, result)
+
+
+# =============================================================================
+# Machine Learning Tools
+# =============================================================================
 
 
 @data_tool()
@@ -813,14 +935,14 @@ async def run_analyst(
 ) -> tuple[str, list, list, Optional[pd.DataFrame]]:
     """
     Run the analyst agent with a user message.
-    
+
     Args:
         user_message: The user's question or request
         df: The pandas DataFrame to analyze (if any)
         state: The AnalysisState to update with findings
         message_history: Previous messages for context
         plots: List to store generated plots (will be mutated)
-        
+
     Returns:
         Tuple of (response_text, updated_message_history, new_plots, updated_df)
         - response_text: The agent's response as a string
@@ -830,14 +952,14 @@ async def run_analyst(
     """
     # Create a fresh list to collect plots from this run
     new_plots = [] if plots is None else plots
-    
+
     deps = AnalysisDependencies(df=df, state=state, plots=new_plots)
-    
+
     result = await analyst_agent.run(
         user_message,
         deps=deps,
         message_history=message_history
     )
-    
+
     # Return the response, message history, plots, and potentially modified dataframe
     return result.output, result.all_messages(), new_plots, deps.df

@@ -14,6 +14,12 @@ from .normality import check_normality
 from .value_counts import get_value_counts
 from .group_statistics import get_group_statistics
 
+# Inferential tools (return InferenceResult with p-values for the session registry)
+from .group_comparison import compare_groups
+from .independence import independence_test
+from .regression import fit_ols
+from .multiple_testing import InferenceResult, PValue, benjamini_hochberg, summarize_session_tests
+
 # Machine learning tools
 from .pca import perform_pca
 from .kmeans import perform_kmeans, find_optimal_k
@@ -32,6 +38,8 @@ from .visualizations import (
     create_cluster_scatter,
     create_elbow_plot,
     create_cluster_profile_chart,
+    # Regression diagnostics
+    create_residual_plots,
 )
 
 __all__ = [
@@ -43,6 +51,14 @@ __all__ = [
     "check_normality",
     "get_value_counts",
     "get_group_statistics",
+    # Inferential
+    "compare_groups",
+    "independence_test",
+    "fit_ols",
+    "InferenceResult",
+    "PValue",
+    "benjamini_hochberg",
+    "summarize_session_tests",
     # Machine learning
     "perform_pca",
     "perform_kmeans",
@@ -58,4 +74,5 @@ __all__ = [
     "create_cluster_scatter",
     "create_elbow_plot",
     "create_cluster_profile_chart",
+    "create_residual_plots",
 ]

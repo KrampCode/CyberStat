@@ -2,6 +2,7 @@
 
 import streamlit as st
 from agent.models import AnalysisState
+from agent.tools.multiple_testing import ALPHA, benjamini_hochberg
 
 
 def escape_latex(text: str) -> str:
@@ -25,7 +26,8 @@ def render_analysis_panel(state: AnalysisState) -> None:
     1. Data Summary section (when data is loaded)
     2. Key Findings section (populated by agent)
     3. Recommendations section (populated by agent)
-    4. Activity Log (collapsible, shows agent actions)
+    4. Hypothesis Tests (collapsible, raw and BH-adjusted p-values)
+    5. Activity Log (collapsible, shows agent actions)
     
     Args:
         state: The current AnalysisState
@@ -109,6 +111,25 @@ def render_analysis_panel(state: AnalysisState) -> None:
     
     st.divider()
     
+    # ---------------------------------------------------------------------
+    # Hypothesis Tests (Collapsible) - multiple-testing correction
+    # ---------------------------------------------------------------------
+    tests = state.hypothesis_tests
+    with st.expander(f"Hypothesis Tests ({len(tests)})", expanded=False):
+        if tests:
+            adjusted = benjamini_hochberg([t.p_value for t in tests])
+            n_sig = sum(p < ALPHA for p in adjusted)
+            st.caption(
+                f"{n_sig} of {len(tests)} significant after Benjamini-Hochberg correction "
+                f"(FDR {ALPHA}). Adjusted p-values update as more tests are run."
+            )
+            for t, p_adj in zip(tests, adjusted):
+                badge = ":green[significant]" if p_adj < ALPHA else ":gray[n.s.]"
+                st.markdown(f"**{escape_latex(t.hypothesis)}** {badge}")
+                st.caption(f"{t.test} | p = {t.p_value:.3g} | adjusted p = {p_adj:.3g}")
+        else:
+            st.caption("No hypothesis tests yet")
+
     # ---------------------------------------------------------------------
     # Activity Log (Collapsible)
     # ---------------------------------------------------------------------
